@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
@@ -22,10 +25,18 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
+    private static User mUser;
+    private Button NameSubmit,GenderSubmit,ProceedButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mUser=new User();
+        NameSubmit=findViewById(R.id.name_submit_button);
+        GenderSubmit=findViewById(R.id.gender_submit_button);
+        ProceedButton=findViewById(R.id.proceed);
 
         mFirebaseAuth=FirebaseAuth.getInstance();
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
@@ -34,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
-                    onSignedInInitialize(user.getDisplayName());
+                    onSignedInInitialize(user.getPhoneNumber());
                 } else {
                     // User is signed out
                     onSignedOutCleanup();
@@ -50,6 +61,33 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         };
+        NameSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                EditText NameEdit = (EditText)findViewById(R.id.name_edit_text);
+                mUser.setName(NameEdit.getText().toString());
+                NameEdit.setText("");
+            }
+        });
+
+        GenderSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                EditText GenderEdit = (EditText)findViewById(R.id.gender_edit_text);
+                mUser.setGender(GenderEdit.getText().toString());
+                GenderEdit.setText("");
+            }
+        });
+
+        ProceedButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this,RoomListActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -77,8 +115,8 @@ public class MainActivity extends AppCompatActivity {
         if (mAuthStateListener != null)
             mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
     }
-    private void onSignedInInitialize(String username) {
-
+    private void onSignedInInitialize(String phoneNumber) {
+        mUser.setPhoneNumber(phoneNumber);
     }
     private void onSignedOutCleanup() {
 
@@ -99,6 +137,10 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public static User getmUser() {
+        return mUser;
     }
 }
 

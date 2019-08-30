@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RoomActivity">
+
+    <TextView
+        android:id="@+id/room_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Room Details"
+        android:textSize="26sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/counter_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="00 Minutes Left"
+        app:layout_constraintTop_toBottomOf="@id/room_title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/from_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="From"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/counter_text_view" />
+
+    <TextView
+        android:id="@+id/from_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Source"
+        android:paddingLeft="12dp"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toRightOf="@id/from_text_view"
+        app:layout_constraintTop_toBottomOf="@id/counter_text_view" />
+
+    <TextView
+        android:id="@+id/to_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="To"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/from_text_view" />
+
+    <TextView
+        android:id="@+id/to_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Destination"
+        android:paddingLeft="12dp"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toRightOf="@id/to_text_view"
+        app:layout_constraintTop_toBottomOf="@id/from_value" />
+
+
+    <TextView
+        android:id="@+id/time_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Time"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/to_text_view" />
+
+    <TextView
+        android:id="@+id/time_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Time"
+        android:paddingLeft="12dp"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toRightOf="@id/time_text_view"
+        app:layout_constraintTop_toBottomOf="@id/to_value" />
+
+
+    <TextView
+        android:id="@+id/date_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/time_text_view" />
+
+    <TextView
+        android:id="@+id/date_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Date"
+        android:paddingLeft="12dp"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toRightOf="@id/date_text_view"
+        app:layout_constraintTop_toBottomOf="@id/time_value" />
+
+    <TextView
+        android:id="@+id/users_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/date_text_view"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="Users"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/user1_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User 1"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/users_text_view"
+        android:visibility="visible"/>
+
+
+    <TextView
+        android:id="@+id/user2_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User 2"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user1_text_view"
+        android:visibility="visible"/>
+
+    <TextView
+        android:id="@+id/user3_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User 3"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user2_text_view"
+        android:visibility="visible"/>
+
+    <TextView
+        android:id="@+id/user4_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User 4"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user3_text_view"
+        android:visibility="visible"/>
+
+    <Button
+        android:id="@+id/book_ride_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/room_title"
+        android:text="Book Ride"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/book_ride_button"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="Chat"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

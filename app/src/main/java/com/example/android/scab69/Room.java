@@ -14,6 +14,8 @@ public class Room {
     private String time;
     private String source;
     private String destination;
+    private String roomTag;
+    private String roomId;
 
     public User getTempUser() {
         return tempUser;
@@ -24,6 +26,14 @@ public class Room {
     public Room(){
     }
 
+    public Room(User user1,String time,String source,String destination,String roomTag,String roomId){
+        this.user1=user1;
+        this.time=time;
+        this.source=source;
+        this.destination=destination;
+        this.roomTag=roomTag;
+        this.roomId=roomId;
+    }
 
     public User getUser1() {
         return user1;
@@ -91,5 +101,21 @@ public class Room {
 
     public void setRoomStatus(int roomStatus) {
         this.roomStatus = roomStatus;
+    }
+
+    public String getRoomTag() {
+        return roomTag;
+    }
+
+    public void setRoomTag(String roomTag) {
+        this.roomTag = roomTag;
+    }
+
+    public String getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(String roomId) {
+        this.roomId = roomId;
     }
 }

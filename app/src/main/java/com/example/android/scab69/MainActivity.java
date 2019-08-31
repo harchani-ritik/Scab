@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
@@ -50,6 +51,11 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         };
+    }
+
+    public void startIntent(View view) {
+        Intent intent = new Intent(this, RoomActivity.class);
+        startActivity(intent);
     }
 
     @Override

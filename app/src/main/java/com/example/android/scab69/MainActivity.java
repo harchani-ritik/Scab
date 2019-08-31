@@ -90,6 +90,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void startIntent(View view) {
+        Intent intent = new Intent(this, RoomActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

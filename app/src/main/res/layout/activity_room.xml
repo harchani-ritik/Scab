@@ -98,6 +98,7 @@
         android:id="@+id/date_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Today"
         android:hint="Date"
         android:paddingLeft="12dp"
         android:textSize="18sp"

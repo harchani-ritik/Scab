@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/MyAppTheme">
- 
         <activity android:name=".JourneyPlan"></activity>
 
         <activity android:name=".RoomListActivity"></activity>
@@ -23,4 +22,5 @@
             </intent-filter>
         </activity>
     </application>
+
 </manifest>

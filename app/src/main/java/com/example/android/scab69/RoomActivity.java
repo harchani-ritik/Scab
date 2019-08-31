@@ -3,6 +3,7 @@ package com.example.android.scab69;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
 import android.os.CountDownTimer;
 import android.widget.TextView;
 
@@ -15,6 +16,7 @@ import static android.view.View.GONE;
 
 public class RoomActivity extends AppCompatActivity {
     public int numberOfUsers = 0;
+  
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,3 +101,4 @@ public class RoomActivity extends AppCompatActivity {
         }
     }
 }
+

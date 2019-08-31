@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/MyAppTheme">
         <activity android:name=".RoomActivity"></activity>
+        <activity android:name=".TagSelectionActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

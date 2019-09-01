@@ -16,7 +16,10 @@ import android.widget.Toast;
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,7 +29,9 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
     private static User mUser;
-    private Button NameSubmit,GenderSubmit,ProceedButton;
+    private Button ProceedButton;
+    private ArrayList<User> userObjectArrayList = new ArrayList<>();
+    private DatabaseReference mUserDatabaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +39,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mUser=new User();
-        NameSubmit=findViewById(R.id.name_submit_button);
-        GenderSubmit=findViewById(R.id.gender_submit_button);
         ProceedButton=findViewById(R.id.proceed);
+
+        FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mUserDatabaseReference= mFirebaseDatabase.getReference().child("users");
+
 
         mFirebaseAuth=FirebaseAuth.getInstance();
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
@@ -52,40 +59,37 @@ public class MainActivity extends AppCompatActivity {
                     startActivityForResult(
                             AuthUI.getInstance()
                                     .createSignInIntentBuilder()
-                                    .setTheme(R.style.AppTheme)
+                                    .setTheme(R.style.NewAppTheme)
+                                    .setLogo(R.drawable.app_logo)
                                     .setIsSmartLockEnabled(false)
                                     .setAvailableProviders(Arrays.asList(
+                                            new AuthUI.IdpConfig.GoogleBuilder().build(),
                                             new AuthUI.IdpConfig.PhoneBuilder().build()))
                                     .build(),
                             RC_SIGN_IN);
                 }
             }
         };
-        NameSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                EditText NameEdit = (EditText)findViewById(R.id.name_edit_text);
-                mUser.setName(NameEdit.getText().toString());
-                NameEdit.setText("");
-            }
-        });
-
-        GenderSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                EditText GenderEdit = (EditText)findViewById(R.id.gender_edit_text);
-                mUser.setGender(GenderEdit.getText().toString());
-                GenderEdit.setText("");
-            }
-        });
 
         ProceedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this,RoomListActivity.class);
+                EditText NameEdit = (EditText)findViewById(R.id.name_edit_text);
+                mUser.setName(NameEdit.getText().toString());
+                NameEdit.setText("");
+
+                EditText GenderEdit = (EditText)findViewById(R.id.gender_edit_text);
+                mUser.setGender(GenderEdit.getText().toString());
+                GenderEdit.setText("");
+
+                FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                final DatabaseReference mUsersDatabaseReference = firebaseDatabase.getReference().child("users");
+                String uid= mUsersDatabaseReference.push().getKey();
+                mUser.setUid(uid);
+                mUsersDatabaseReference.child(uid).setValue(mUser);
+                Intent intent=new Intent(MainActivity.this,JourneyPlan.class);
                 startActivity(intent);
+
             }
         });
     }

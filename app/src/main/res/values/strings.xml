@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">Scab69</string>
+    <string name="app_name">Scab</string>
+
+    <string-array name="planets_array">
+        <item>IIITA</item>
+        <item>NITA</item>
+        <item>IITK</item>
+        <item>BHU</item>
+
+    </string-array>
+
 </resources>
+
+

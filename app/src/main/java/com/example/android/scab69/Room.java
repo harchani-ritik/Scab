@@ -6,16 +6,16 @@ public class Room {
     public final static int VACANT=0;
     public final static int FULL=1;
 
-    private User user1;
-    private User user2;
-    private User user3;
-    private User user4;
+    private User user1=new User();
+    private User user2=new User();
+    private User user3=new User();
+    private User user4=new User();
     private User tempUser;
-    private String time;
-    private String source;
-    private String destination;
-    private String roomTag;
-    private String roomId;
+    private String time="18:30";
+    private String source="IIIT-Allahabad";
+    private String destination="CIVIL LINES";
+    private String roomTag="IIIT-A";
+    private String roomId="ABCD";
 
     public User getTempUser() {
         return tempUser;

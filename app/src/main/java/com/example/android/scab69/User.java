@@ -7,12 +7,13 @@ public class User {
     public final static int AVAILABLE=1;
     public final static int INAROOM=2;
 
-    private String name;
-    private String gender;
-    private String phoneNumber;
-    private String communityStatus;
+    private String name="Vivek Mehta";
+    private String gender="Male";
+    private String phoneNumber="9585886948";
+    private String communityStatus="IEC2018093";
+    private String uid;
     //basically community status is an additional variable which we will use here for storing Roll Number
-    private int userStatus;
+    private int userStatus=INAROOM;
 
 
     public User(){
@@ -56,5 +57,13 @@ public class User {
 
     public void setStatus(int status) {
         this.userStatus = status;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 }

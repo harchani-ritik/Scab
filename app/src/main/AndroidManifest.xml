@@ -8,9 +8,15 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/MyAppTheme">
-        <activity android:name=".RoomListActivity"></activity>
-        <activity android:name=".RoomActivity" />
+        android:theme="@style/NewAppTheme">
+        <activity android:name=".ChatRoom"></activity>
+        <activity android:name=".JourneyPlan"></activity>
+        <activity
+            android:name=".RoomListActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".RoomActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

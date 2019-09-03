@@ -12,8 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -62,7 +60,7 @@ public class RoomListActivity extends AppCompatActivity {
                 @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormatter = new SimpleDateFormat("dd MMM, yyyy  HH:mm");
                 String timeToDisplay = dateFormatter.format(new Date(time));
                 String roomId = mRoomDatabaseReference.push().getKey();
-                Room room = new Room(MainActivity.getmUser(),timeToDisplay,"ABCD","DEF","IIIT-Allahabad",roomId);
+                Room room = new Room(UserDetailsActivity.getmUser(),timeToDisplay,"ABCD","DEF","IIIT-Allahabad",roomId);
                 mRoomDatabaseReference.child(roomId).setValue(room);
 
                 Intent intent = new Intent(RoomListActivity.this,RoomActivity.class);
@@ -138,7 +136,7 @@ public class RoomListActivity extends AppCompatActivity {
         @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormatter = new SimpleDateFormat("dd MMM, yyyy  HH:mm");
         String timeToDisplay = dateFormatter.format(new Date(time));
         String roomId = mRoomDatabaseReference.push().getKey();
-        Room room = new Room(MainActivity.getmUser(),timeToDisplay,Src,Dest,"IIIT-Allahabad",roomId);
+        Room room = new Room(UserDetailsActivity.getmUser(),timeToDisplay,Src,Dest,"IIIT-Allahabad",roomId);
 
         for(int i=0;i<10;i++)
             AvailableRoomsList.add(room);

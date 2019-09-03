@@ -1,5 +1,7 @@
 package com.example.android.scab69;
 
+import java.util.ArrayList;
+
 public class Room {
 
 
@@ -10,16 +12,14 @@ public class Room {
     private User user2=new User();
     private User user3=new User();
     private User user4=new User();
-    private User tempUser;
+    private ArrayList< User >tempUser;
     private String time;
     private String source;
     private String destination;
     private String roomTag;
     private String roomId;
 
-    public User getTempUser() {
-        return tempUser;
-    }
+
 
     private int roomStatus;
 
@@ -83,9 +83,6 @@ public class Room {
         this.user4 = user4;
     }
 
-    public void setTempUser(User tempUser) {
-        this.tempUser = tempUser;
-    }
 
     public void setTime(String time) {
         this.time = time;

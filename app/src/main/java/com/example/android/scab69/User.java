@@ -7,13 +7,17 @@ public class User {
     public final static int AVAILABLE=1;
     public final static int INAROOM=2;
 
-    private String name="Vivek Mehta";
-    private String gender="Male";
-    private String phoneNumber="9585886948";
-    private String communityStatus="IEC2018093";
+    public final static int MALE=0;
+    public final static int FEMALE=0;
+
+    private String name;
+    private int gender;
+    private int age;
+    private String phoneNumber;
+    private String communityStatus;
     private String uid;
     //basically community status is an additional variable which we will use here for storing Roll Number
-    private int userStatus=INAROOM;
+    private int userStatus;
 
 
     public User(){
@@ -23,9 +27,6 @@ public class User {
         return name;
     }
 
-    public String getGender() {
-        return gender;
-    }
 
     public String getCommunityStatus() {
         return communityStatus;
@@ -47,9 +48,6 @@ public class User {
         this.name = name;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
@@ -65,5 +63,21 @@ public class User {
 
     public void setUid(String uid) {
         this.uid = uid;
+    }
+
+    public int getGender() {
+        return gender;
+    }
+
+    public void setGender(int gender) {
+        this.gender = gender;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 }

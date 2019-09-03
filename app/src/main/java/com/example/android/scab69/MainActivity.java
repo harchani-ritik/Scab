@@ -11,6 +11,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
@@ -24,12 +27,12 @@ import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
+    private TextView ErrorText;
     public static final int RC_SIGN_IN = 1;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
     private static User mUser;
-    private Button ProceedButton;
     private ArrayList<User> userObjectArrayList = new ArrayList<>();
     private DatabaseReference mUserDatabaseReference;
 
@@ -38,8 +41,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ErrorText=findViewById(R.id.error_text);
+
         mUser=new User();
-        ProceedButton=findViewById(R.id.proceed);
+        final Button proceedButton = findViewById(R.id.proceed);
+
+        final RadioGroup genderRadioGroup = findViewById(R.id.radioSex);
+        genderRadioGroup.clearCheck();
 
         FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
         mUserDatabaseReference= mFirebaseDatabase.getReference().child("users");
@@ -63,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                                     .setLogo(R.drawable.app_logo)
                                     .setIsSmartLockEnabled(false)
                                     .setAvailableProviders(Arrays.asList(
-                                            new AuthUI.IdpConfig.GoogleBuilder().build(),
+                                            new AuthUI.IdpConfig.AnonymousBuilder().build(),
                                             new AuthUI.IdpConfig.PhoneBuilder().build()))
                                     .build(),
                             RC_SIGN_IN);
@@ -71,24 +79,70 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        ProceedButton.setOnClickListener(new View.OnClickListener() {
+        proceedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ErrorText.setVisibility(View.INVISIBLE);
+                int proceedFlag=1;
+
+
+                EditText CommunityStatus = (EditText)findViewById(R.id.community_status_edit);
+                String rollNo =CommunityStatus.getText().toString();
+                if(rollNo.isEmpty()) {
+                    showErrorMsg(4);
+                    proceedFlag = 0;
+                }
+                else {
+                    mUser.setCommunityStatus(rollNo);
+                }
+
+                EditText AgeEdit = (EditText)findViewById(R.id.age_edit_text);
+                String age =AgeEdit.getText().toString();
+                if(age.isEmpty()) {
+                    showErrorMsg(3);
+                    proceedFlag = 0;
+                }
+                else {
+                    mUser.setAge(Integer.parseInt(age));
+                }
+
+                // get selected radio button from radioGroup
+                int selectedId = genderRadioGroup.getCheckedRadioButtonId();
+                if(selectedId==-1)
+                {
+                    showErrorMsg(2);
+                    proceedFlag = 0;
+                }
+                else {
+                    // find the radiobutton by returned id
+                    RadioButton radioSexButton = (RadioButton) findViewById(selectedId);
+
+                    if (radioSexButton.getText() == "MALE")
+                        mUser.setGender(User.MALE);
+                    else if (radioSexButton.getText() == "FEMALE")
+                        mUser.setGender(User.FEMALE);
+                }
+
                 EditText NameEdit = (EditText)findViewById(R.id.name_edit_text);
-                mUser.setName(NameEdit.getText().toString());
-                NameEdit.setText("");
+                String name =NameEdit.getText().toString();
+                if(name.isEmpty()) {
+                    showErrorMsg(1);
+                    proceedFlag = 0;
+                }
+                else {
+                    mUser.setName(name);
+                }
 
-                EditText GenderEdit = (EditText)findViewById(R.id.gender_edit_text);
-                mUser.setGender(GenderEdit.getText().toString());
-                GenderEdit.setText("");
+                if(proceedFlag==1) {
+                    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                    final DatabaseReference mUsersDatabaseReference = firebaseDatabase.getReference().child("users");
+                    String uid = mUsersDatabaseReference.push().getKey();
+                    mUser.setUid(uid);
+                    mUsersDatabaseReference.child(uid).setValue(mUser);
 
-                FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                final DatabaseReference mUsersDatabaseReference = firebaseDatabase.getReference().child("users");
-                String uid= mUsersDatabaseReference.push().getKey();
-                mUser.setUid(uid);
-                mUsersDatabaseReference.child(uid).setValue(mUser);
-                Intent intent=new Intent(MainActivity.this,JourneyPlan.class);
-                startActivity(intent);
+                    Intent intent = new Intent(MainActivity.this, JourneyPlan.class);
+                    startActivity(intent);
+                }
 
             }
         });
@@ -145,6 +199,38 @@ public class MainActivity extends AppCompatActivity {
 
     public static User getmUser() {
         return mUser;
+    }
+
+    private void showErrorMsg(int token)
+    {
+        ErrorText.setVisibility(View.VISIBLE);
+        switch (token)
+        {
+            case 1:
+            {
+                ErrorText.setText("Name is a required field");
+                break;
+            }
+            case 2:
+            {
+                ErrorText.setText("Please Select Gender");
+                break;
+            }
+            case 3:
+            {
+                ErrorText.setText("Enter your Age");
+                break;
+            }
+            case 4:
+            {
+                ErrorText.setText("Enrollment Number is Mandatory");
+                break;
+            }
+
+
+
+        }
+
     }
 }
 

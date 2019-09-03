@@ -11,11 +11,11 @@ public class Room {
     private User user3=new User();
     private User user4=new User();
     private User tempUser;
-    private String time="18:30";
-    private String source="IIIT-Allahabad";
-    private String destination="CIVIL LINES";
-    private String roomTag="IIIT-A";
-    private String roomId="ABCD";
+    private String time;
+    private String source;
+    private String destination;
+    private String roomTag;
+    private String roomId;
 
     public User getTempUser() {
         return tempUser;

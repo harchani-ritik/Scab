@@ -1,5 +1,7 @@
 package com.example.android.scab69;
 
+import java.util.ArrayList;
+
 public class Room {
 
 
@@ -10,29 +12,30 @@ public class Room {
     private User user2=new User();
     private User user3=new User();
     private User user4=new User();
-    private User tempUser;
-    private String time="18:30";
-    private String source="IIIT-Allahabad";
-    private String destination="CIVIL LINES";
-    private String roomTag="IIIT-A";
-    private String roomId="ABCD";
+    private ArrayList< User >tempUser;
+    private String source;
+    private String destination;
+    private String roomTag;
+    private String roomId;
+    private String jouneyTime;
+    private String roomCreationTime;
 
-    public User getTempUser() {
-        return tempUser;
-    }
+
 
     private int roomStatus;
 
     public Room(){
     }
 
-    public Room(User user1,String time,String source,String destination,String roomTag,String roomId){
+    public Room(User user1,String roomCreationTime,String source,String destination,String roomTag,String roomId){
         this.user1=user1;
-        this.time=time;
+        this.roomCreationTime=roomCreationTime;
         this.source=source;
         this.destination=destination;
         this.roomTag=roomTag;
         this.roomId=roomId;
+        
+        user2=user3=user4=null;
     }
 
     public User getUser1() {
@@ -56,7 +59,7 @@ public class Room {
     }
 
     public String getTime() {
-        return time;
+        return roomCreationTime;
     }
 
     public String getSource() {
@@ -83,12 +86,9 @@ public class Room {
         this.user4 = user4;
     }
 
-    public void setTempUser(User tempUser) {
-        this.tempUser = tempUser;
-    }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setTime(String roomCreationTime) {
+        this.roomCreationTime = roomCreationTime;
     }
 
     public void setSource(String source) {
@@ -117,5 +117,13 @@ public class Room {
 
     public void setRoomId(String roomId) {
         this.roomId = roomId;
+    }
+
+    public String getJouneyTime() {
+        return jouneyTime;
+    }
+
+    public void setJouneyTime(String jouneyTime) {
+        this.jouneyTime = jouneyTime;
     }
 }

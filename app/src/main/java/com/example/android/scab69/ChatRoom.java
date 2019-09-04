@@ -34,18 +34,21 @@ public class ChatRoom extends AppCompatActivity {
     private EditText mMessageEditText;
     private Button mSendButton;
 
-
-
-
+    Room mRoom;
+    int RoomPosition;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_room);
 
+        if(getIntent().hasExtra("position")) {
+            RoomPosition= getIntent().getIntExtra("position", 0);
+            mRoom = RoomListActivity.getRoomFromRoomsList(RoomPosition);
+        }
+
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-
-
-        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("messages");
+        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("rooms")
+                .child(mRoom.getRoomTag()).child(mRoom.getRoomId()).child("messages");
 
         mMessageListView = (ListView) findViewById(R.id.messageListView);
         mMessageEditText = (EditText) findViewById(R.id.messageEditText);

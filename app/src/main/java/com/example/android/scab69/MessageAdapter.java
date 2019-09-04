@@ -1,19 +1,11 @@
 package com.example.android.scab69;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
-import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.content.Context;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 
 import java.util.List;
@@ -38,7 +30,7 @@ public class MessageAdapter extends ArrayAdapter<FriendlyMessage> {
             messageTextView.setVisibility(View.VISIBLE);
             messageTextView.setText(message.getText());
 
-        authorTextView.setText(MainActivity.getmUser().getName());
+        authorTextView.setText(UserDetailsActivity.getmUser().getName());
 
         return convertView;
     }

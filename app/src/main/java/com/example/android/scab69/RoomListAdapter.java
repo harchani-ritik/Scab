@@ -66,7 +66,6 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.RoomOb
                 RoomListActivity.YourRoomsList.add(RoomList.get(position));
             }
         });
-
     }
 
     public void addItem(Room dataObj, int index) {

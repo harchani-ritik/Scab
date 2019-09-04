@@ -25,19 +25,29 @@ import static android.view.View.GONE;
 
 public class RoomActivity extends AppCompatActivity {
     public int numberOfUsers = 0;
+    Room mRoom;
+    int RoomPosition;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room);
+
+        if(getIntent().hasExtra("position")) {
+            RoomPosition= getIntent().getIntExtra("position", 0);
+            mRoom = RoomListActivity.getRoomFromRoomsList(RoomPosition);
+        }
 
         Button button = findViewById(R.id.chat_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(RoomActivity.this,ChatRoom.class);
+                intent.putExtra("position",RoomPosition);
                 startActivity(intent);
             }
         });
+
         //Fetching Current Time
         Date d = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");

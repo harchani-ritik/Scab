@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/NewAppTheme">
+        <activity android:name=".MainScreen">
         <activity android:name=".ChatRoom"></activity>
         <activity android:name=".JourneyPlan">
             <intent-filter>

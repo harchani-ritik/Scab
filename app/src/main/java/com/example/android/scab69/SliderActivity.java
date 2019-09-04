@@ -15,8 +15,8 @@ import java.util.TimerTask;
 
 import me.relex.circleindicator.CircleIndicator;
 
-public class MainScreen extends AppCompatActivity {
-    Button skip;
+public class SliderActivity extends AppCompatActivity {
+    Button NextButton;
     private static ViewPager mPager;
     private static int currentPage = 0;
     private static final Integer[] images = {R.drawable.image2, R.drawable.image1, R.drawable.ikia};
@@ -25,12 +25,12 @@ public class MainScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_screen);
-        skip = (Button) findViewById(R.id.skip);
-        skip.setOnClickListener(new View.OnClickListener() {
+        setContentView(R.layout.activity_slider);
+        NextButton = (Button) findViewById(R.id.next);
+        NextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainScreen.this, MainActivity.class));
+                startActivity(new Intent(SliderActivity.this, UserDetailsActivity.class));
             }
         });
         init();
@@ -41,7 +41,7 @@ public class MainScreen extends AppCompatActivity {
             imagesArray.add(images[i]);
 
         mPager = (ViewPager) findViewById(R.id.pager);
-        mPager.setAdapter(new MyAdapter(MainScreen.this, imagesArray));
+        mPager.setAdapter(new MyAdapter(SliderActivity.this, imagesArray));
         CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(mPager);
 

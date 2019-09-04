@@ -4,33 +4,34 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
+
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/next"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="550dp"
+            android:background="@drawable/custom_edit_text"
+            android:elevation="20dp"
+            android:ellipsize="marquee"
+            android:text="NEXT"
+            android:textColor="@color/white" />
+
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/pager"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_alignParentTop="true" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:alpha="0.5"
-            android:elevation="20dp"
-            android:ellipsize="marquee"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/skip"
-            android:text="Skip"
-            />
-
         <me.relex.circleindicator.CircleIndicator
             android:id="@+id/indicator"
             android:layout_width="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
             android:layout_height="48dp"
-            />
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true" />
     </RelativeLayout>
 </RelativeLayout>

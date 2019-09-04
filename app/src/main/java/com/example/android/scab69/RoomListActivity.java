@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -23,6 +25,7 @@ public class RoomListActivity extends AppCompatActivity {
 
     static ArrayList<Room> YourRoomsList=new ArrayList<>();
     ArrayList<Room> AvailableRoomsList;
+    private static ArrayList<Room> FilterRoomsList;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference mRoomDatabaseReference;
     ChildEventListener mChildEventListener;
@@ -30,7 +33,7 @@ public class RoomListActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
 
-    String Dest,Src,Time;
+    private String Dest,Src,JourneyTime,Tag;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,8 +44,10 @@ public class RoomListActivity extends AppCompatActivity {
         mRoomDatabaseReference = firebaseDatabase.getReference().child("rooms");
 
         AvailableRoomsList=new ArrayList<>();
+        FilterRoomsList=new ArrayList<>();
         fetchAvailableRooms();
-        Toast.makeText(RoomListActivity.this,"Fetch Rooms= "+AvailableRoomsList.size(),Toast.LENGTH_SHORT).show();
+
+
         mRecyclerView = findViewById(R.id.availableRoomList);
         mRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
@@ -56,23 +61,17 @@ public class RoomListActivity extends AppCompatActivity {
         createRoomButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                long time = System.currentTimeMillis();
-                @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormatter = new SimpleDateFormat("dd MMM, yyyy  HH:mm");
-                String timeToDisplay = dateFormatter.format(new Date(time));
-                String roomId = mRoomDatabaseReference.push().getKey();
-                Room room = new Room(UserDetailsActivity.getmUser(),timeToDisplay,"ABCD","DEF","IIIT-Allahabad",roomId);
-                mRoomDatabaseReference.child(roomId).setValue(room);
+                createNewRoom();
 
-                Intent intent = new Intent(RoomListActivity.this,RoomActivity.class);
-                startActivity(intent);
+                /*Intent intent = new Intent(RoomListActivity.this,RoomActivity.class);
+                startActivity(intent);*/
             }
         });
         Button yourRooms = findViewById(R.id.yourRooms);
         yourRooms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(),"List of Selected Rooms",Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(view.getContext(),"Fetched="+FilterRoomsList.size(),Toast.LENGTH_SHORT).show();
                 mAdapter= new RoomListAdapter(YourRoomsList,1);
                 mRecyclerView.setAdapter(mAdapter);
             }
@@ -83,12 +82,12 @@ public class RoomListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(view.getContext(),"List of Selected Rooms",Toast.LENGTH_SHORT).show();
-
                 mAdapter= new RoomListAdapter(AvailableRoomsList,0);
                 mRecyclerView.setAdapter(mAdapter);
             }
         });
     }
+
 
     @Override
     protected void onResume() {
@@ -100,23 +99,30 @@ public class RoomListActivity extends AppCompatActivity {
                 Log.i("QueryListActivity", " Clicked on Item " + position);
                 if (AvailableRoomsList.get(position) != null) {
                     Intent intent = new Intent(RoomListActivity.this, RoomActivity.class);
+                    intent.putExtra("position",position);
                     startActivity(intent);
                 }
             }
         });
     }
 
-    private void fetchAvailableRooms()
-    {
-        /*
+    private void fetchAvailableRooms() {
         Toast.makeText(RoomListActivity.this, "Fetching Rooms", Toast.LENGTH_SHORT).show();
-
+        DatabaseReference myRoomsDatabaseReference = mRoomDatabaseReference.child(Tag);
         if (mChildEventListener == null) {
             mChildEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     Room room = dataSnapshot.getValue(Room.class);
                     AvailableRoomsList.add(room);
+                    if(room.getDestination().equals(Dest)&&room.getSource().equals(Src))
+                    {
+                        FilterRoomsList.add(room);
+                        mAdapter = new RoomListAdapter(FilterRoomsList,0);
+                        mRecyclerView.setAdapter(mAdapter);
+                    }
+                    /*mAdapter = new RoomListAdapter(AvailableRoomsList,0);
+                    mRecyclerView.setAdapter(mAdapter);*/
                 }
 
                 public void onChildChanged(DataSnapshot dataSnapshot, String s) {
@@ -131,16 +137,9 @@ public class RoomListActivity extends AppCompatActivity {
                 public void onCancelled(DatabaseError databaseError) {
                 }
             };
-            mRoomDatabaseReference.addChildEventListener(mChildEventListener);*/
-        long time = System.currentTimeMillis();
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormatter = new SimpleDateFormat("dd MMM, yyyy  HH:mm");
-        String timeToDisplay = dateFormatter.format(new Date(time));
-        String roomId = mRoomDatabaseReference.push().getKey();
-        Room room = new Room(UserDetailsActivity.getmUser(),timeToDisplay,Src,Dest,"IIIT-Allahabad",roomId);
-
-        for(int i=0;i<10;i++)
-            AvailableRoomsList.add(room);
+            myRoomsDatabaseReference.addChildEventListener(mChildEventListener);
         }
+    }
 
     private void getIncomingIntent()
     {
@@ -149,7 +148,22 @@ public class RoomListActivity extends AppCompatActivity {
         if(getIntent().hasExtra("src"))
             Src=getIntent().getStringExtra("src");
         if(getIntent().hasExtra("time"))
-            Time=getIntent().getStringExtra("time");
+            JourneyTime=getIntent().getStringExtra("time");
+        if(getIntent().hasExtra("time"))
+            Tag=getIntent().getStringExtra("tag");
+    }
+    private void createNewRoom() {
+        long time = System.currentTimeMillis();
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormatter = new SimpleDateFormat("dd MMM, yyyy  HH:mm");
+        String timeToDisplay = dateFormatter.format(new Date(time));
+
+        String roomId = mRoomDatabaseReference.push().getKey();
+        Room room = new Room(UserDetailsActivity.getmUser(),timeToDisplay,Src,Dest,Tag,roomId);
+        mRoomDatabaseReference.child(Tag).child(roomId).setValue(room);
+    }
+
+    public static Room getRoomFromRoomsList(int position) {
+        return FilterRoomsList.get(position);
     }
 }
 

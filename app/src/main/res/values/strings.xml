@@ -2,12 +2,13 @@
     <string name="app_name">Scab</string>
 
     <string-array name="planets_array">
-        <item>IIITA</item>
-        <item>NITA</item>
-        <item>IITK</item>
-        <item>BHU</item>
+        <item>IIIT Allahabad</item>
+        <item>MNNIT Allahabad </item>
+        <item>Allahabbad University</item>
+        <item>SIET</item>
 
     </string-array>
+
 
 </resources>
 

@@ -69,19 +69,18 @@ public class JourneyPlan extends AppCompatActivity {
             }
         };
 
-        Initial = (EditText) findViewById(R.id.initial);
-        Destination = (EditText) findViewById(R.id.destinaton);
         SearchBox = (Button) findViewById(R.id.search_box);
         //Time=findViewById(R.id.time_to_arrive);
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+        Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
                 R.array.planets_array, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        spinner.setAdapter(adapter);
-
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner2.setAdapter(adapter2);
+        Spinner spinner1 = (Spinner) findViewById(R.id.spinner1);
+        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,
+                R.array.planets_array, android.R.layout.simple_spinner_item);
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner1.setAdapter(adapter1);
         SearchBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

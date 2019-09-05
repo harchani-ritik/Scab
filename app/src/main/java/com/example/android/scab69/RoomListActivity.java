@@ -101,6 +101,7 @@ public class RoomListActivity extends AppCompatActivity {
                     Intent intent = new Intent(RoomListActivity.this, RoomActivity.class);
                     intent.putExtra("position",position);
                     startActivity(intent);
+
                 }
             }
         });
@@ -154,11 +155,12 @@ public class RoomListActivity extends AppCompatActivity {
     }
     private void createNewRoom() {
         long time = System.currentTimeMillis();
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormatter = new SimpleDateFormat("dd MMM, yyyy  HH:mm");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm");
         String timeToDisplay = dateFormatter.format(new Date(time));
 
         String roomId = mRoomDatabaseReference.push().getKey();
         Room room = new Room(UserDetailsActivity.getmUser(),timeToDisplay,Src,Dest,Tag,roomId);
+        room.setUser1(UserDetailsActivity.getmUser());
         mRoomDatabaseReference.child(Tag).child(roomId).setValue(room);
     }
 

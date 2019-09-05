@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
 public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.RoomObjectHolder> {
@@ -57,13 +60,16 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.RoomOb
     @Override
     public void onBindViewHolder(@NonNull final RoomObjectHolder holder, final int position) {
 
-        if(flag==1)
-            holder.JoinRoom.setText("REQUEST SENT");
         holder.JoinRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                holder.JoinRoom.setText("REQUEST SENT");
-                RoomListActivity.YourRoomsList.add(RoomList.get(position));
+                String RequestedRoomId = RoomList.get(position).getRoomId();
+                String RequestedRoomTag = RoomList.get(position).getRoomTag();
+                FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                DatabaseReference tempUserRef = firebaseDatabase.getReference().
+                        child("rooms").child(RequestedRoomTag).child(RequestedRoomId);
+                RoomList.get(position).setTempUser(UserDetailsActivity.getmUser());
+                tempUserRef.setValue(RoomList.get(position));
             }
         });
     }

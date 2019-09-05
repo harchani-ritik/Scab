@@ -31,7 +31,7 @@ public class SliderActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(new Intent(SliderActivity.this, JourneyPlan.class));
-                intent.putExtra("detailFlag",1);
+                intent.putExtra("sliderFlag",1);
                 startActivity(intent);
 
             }

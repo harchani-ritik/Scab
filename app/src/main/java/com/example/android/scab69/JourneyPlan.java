@@ -30,18 +30,12 @@ public class JourneyPlan extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     private String UserPhoneNumber;
-    public boolean isFirstRun;
+    public boolean isFirstRun,isFRun;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_journey_plan);
-
-        int DetailFlag=getIntent().getIntExtra("detailFlag",0);
-        if(DetailFlag==1)
-            getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                    .putBoolean("isFirstRun", false).apply();
-        checkUserDetails();
 
         mFirebaseAuth=FirebaseAuth.getInstance();
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
@@ -102,17 +96,43 @@ public class JourneyPlan extends AppCompatActivity {
 
         if (isFirstRun) {
             //show start
-            Intent intent = new Intent(JourneyPlan.this, SliderActivity.class);
+            Intent intent = new Intent(JourneyPlan.this, UserDetailsActivity.class);
             startActivity(intent);
             //Toast.makeText(JourneyPlan.this, "First Run", Toast.LENGTH_LONG).show();
         }
 
     }
+    private void checkSliderActivity() {
+        isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                .getBoolean("isFRun", true);
+
+        if (isFirstRun) {
+            Intent intent = new Intent(JourneyPlan.this, SliderActivity.class);
+            startActivity(intent);
+        }
+
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
+
+        int SliderFlag=getIntent().getIntExtra("sliderFlag",0);
+        if(SliderFlag==1)
+            getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                    .putBoolean("isFRun", false).apply();
+        checkSliderActivity();
+
         mFirebaseAuth.addAuthStateListener(mAuthStateListener);
+
+        int DetailFlag=getIntent().getIntExtra("detailFlag",0);
+        if(DetailFlag==1)
+            getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                    .putBoolean("isFirstRun", false).apply();
+        checkUserDetails();
+
     }
+
     @Override
     protected void onPause() {
         super.onPause();

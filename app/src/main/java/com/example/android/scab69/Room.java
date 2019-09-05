@@ -34,7 +34,7 @@ public class Room {
         this.destination=destination;
         this.roomTag=roomTag;
         this.roomId=roomId;
-        
+        tempUser=new ArrayList<>();
         user2=user3=user4=null;
     }
 
@@ -58,7 +58,7 @@ public class Room {
         return roomStatus;
     }
 
-    public String getTime() {
+    public String getRoomCreationTime() {
         return roomCreationTime;
     }
 
@@ -125,5 +125,9 @@ public class Room {
 
     public void setJouneyTime(String jouneyTime) {
         this.jouneyTime = jouneyTime;
+    }
+
+    public void setTempUser(User user) {
+        this.tempUser.add(user);
     }
 }

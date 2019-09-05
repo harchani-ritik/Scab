@@ -90,7 +90,6 @@ public class UserDetailsActivity extends AppCompatActivity {
                     updateUsersDatabase();
 
                     Intent intent = new Intent(UserDetailsActivity.this, JourneyPlan.class);
-                    intent.putExtra("detailFlag",1);
                     startActivity(intent);
                 }
             }

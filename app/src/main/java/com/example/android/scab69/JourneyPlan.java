@@ -102,8 +102,7 @@ public class JourneyPlan extends AppCompatActivity {
 
         if (isFirstRun) {
             //show start
-            Intent intent = new Intent(JourneyPlan.this, UserDetailsActivity.class);
-            intent.putExtra("phoneNumber",UserPhoneNumber);
+            Intent intent = new Intent(JourneyPlan.this, SliderActivity.class);
             startActivity(intent);
             //Toast.makeText(JourneyPlan.this, "First Run", Toast.LENGTH_LONG).show();
         }
@@ -175,6 +174,5 @@ public class JourneyPlan extends AppCompatActivity {
         intent.addCategory(Intent.CATEGORY_HOME);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
-
     }
 }

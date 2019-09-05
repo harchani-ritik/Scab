@@ -16,7 +16,7 @@ import java.util.TimerTask;
 import me.relex.circleindicator.CircleIndicator;
 
 public class SliderActivity extends AppCompatActivity {
-    Button NextButton;
+    Button SkipButton;
     private static ViewPager mPager;
     private static int currentPage = 0;
     private static final Integer[] images = {R.drawable.image2, R.drawable.image1, R.drawable.ikia};
@@ -26,11 +26,14 @@ public class SliderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slider);
-        NextButton = (Button) findViewById(R.id.next);
-        NextButton.setOnClickListener(new View.OnClickListener() {
+        SkipButton = (Button) findViewById(R.id.skip);
+        SkipButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(SliderActivity.this, UserDetailsActivity.class));
+                Intent intent = new Intent(new Intent(SliderActivity.this, JourneyPlan.class));
+                intent.putExtra("detailFlag",1);
+                startActivity(intent);
+
             }
         });
         init();

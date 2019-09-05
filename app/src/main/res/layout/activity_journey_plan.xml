@@ -5,37 +5,121 @@
     android:layout_height="match_parent"
     android:paddingLeft="16dp"
     android:paddingRight="16dp">
-
-    <EditText
-        android:id="@+id/initial"
+    <ImageView
+        android:id="@+id/app_logo"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/app_logo"
+        android:layout_marginStart="50dp"/>
+    <TextView
+        android:id="@+id/head"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/custom_edit_text"
-        android:hint="From"
-        android:textColorHint="#FFF"
-        android:textColor="#FFF"
-        android:imeOptions="actionDone"
+        android:textColor="@color/colorTheme"
+        android:text="Search Ride"
+        android:textSize="30sp"
         android:singleLine="true"
         android:textAlignment="center"
+        android:layout_marginStart="80dp"
         />
-
-    <EditText
-        android:id="@+id/destinaton"
-        android:layout_marginTop="10dp"
-        android:layout_below="@id/initial"
+    <ImageView
+        android:id="@+id/from_image"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/from_image"
+        android:layout_below="@+id/head"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"/>
+    <ImageView
+        android:id="@+id/dot1"
+        android:layout_width="7dp"
+        android:layout_height="7dp"
+        android:src="@drawable/eclipse"
+        android:layout_below="@+id/from_image"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="25dp"/>
+    <ImageView
+        android:id="@+id/dot2"
+        android:layout_width="7dp"
+        android:layout_height="7dp"
+        android:src="@drawable/eclipse"
+        android:layout_below="@+id/dot1"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="25dp"/>
+    <ImageView
+        android:id="@+id/dot3"
+        android:layout_width="7dp"
+        android:layout_height="7dp"
+        android:src="@drawable/eclipse"
+        android:layout_below="@+id/dot2"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="25dp"/>
+    <ImageView
+        android:id="@+id/to_image"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/to_image"
+        android:layout_below="@+id/from_image"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="20dp"/>
+    <LinearLayout
+        android:id="@+id/initial"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:background="@drawable/custom_edit_text"
-        android:hint="To"
-        android:textColorHint="#FFF"
-        android:textColor="#FFF"
-        android:imeOptions="actionDone"
-        android:singleLine="true"
-        app:layout_constraintVertical_bias="0.5"
-        android:textAlignment="center"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        android:layout_marginTop="15dp"
+        android:background="#F9F9F9"
+        android:layout_below="@+id/head"
+        android:layout_marginStart="80dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="From"
+            android:textColor="#000"
+            android:singleLine="true"
+            android:textAlignment="center"
+            android:textSize="17sp"
+            android:orientation="horizontal"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="5dp"/>
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner2"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="7dp"></Spinner>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="15dp"
+        android:background="#F9F9F9"
+        android:layout_below="@+id/initial"
+        android:layout_marginStart="80dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="To"
+            android:textColor="#000"
+            android:singleLine="true"
+            android:textAlignment="center"
+            android:textSize="17sp"
+            android:orientation="horizontal"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="5dp"/>
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner1"
+            android:textColor="#FFF"
+            android:textSize="20dp"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="7dp"></Spinner>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -49,49 +133,93 @@
         >
 
 
-        <EditText
+        <TimePicker
             android:id="@+id/time_to_arrive"
             android:layout_marginTop="10dp"
             android:layout_below="@id/initial"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@drawable/custom_edit_text"
-            android:hint="Time"
-            android:textColorHint="#FFF"
-            android:textColor="#FFF"
-            android:imeOptions="actionDone"
-            android:singleLine="true"
-            app:layout_constraintVertical_bias="0.5"
-            android:textAlignment="center"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="wrap_content"
+            android:timePickerMode="spinner"
             />
 
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <TextView
+        android:id="@+id/tags"
         android:layout_below="@+id/i1"
-        android:layout_centerHorizontal="true"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tags"/>
-
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinner"></Spinner>
-    </LinearLayout>
-
-    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:text="Tags:"
+        android:textColor="#000"
+        android:textAlignment="center"
+        android:textSize="17sp"
+        android:orientation="horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="-26dp"/>
+    <TextView
+        android:id="@+id/tag1"
+        android:layout_below="@+id/tags"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="IIIT Allahabad"
+        android:textColor="#fff"
+        android:background="@drawable/custom_edit_text"
+        android:textAlignment="center"
+        android:textSize="17sp"
+        android:orientation="horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:padding="5dp"/>
+    <TextView
+        android:id="@+id/tag2"
+        android:layout_below="@+id/tags"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MNNIT"
+        android:textColor="#fff"
+        android:background="@drawable/custom_edit_text1"
+        android:textAlignment="center"
+        android:textSize="17sp"
+        android:orientation="horizontal"
+        android:layout_marginStart="250dp"
+        android:layout_marginTop="5dp"
+        android:padding="5dp"/>
+    <TextView
+        android:id="@+id/tag3"
+        android:layout_below="@+id/tag1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Allahabad University"
+        android:textColor="#fff"
+        android:background="@drawable/custom_edit_text1"
+        android:textAlignment="center"
+        android:textSize="17sp"
+        android:orientation="horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:padding="5dp"/>
+    <TextView
+        android:id="@+id/tag4"
+        android:layout_below="@+id/tag2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SIET"
+        android:textColor="#fff"
+        android:background="@drawable/custom_edit_text1"
+        android:textAlignment="center"
+        android:textSize="17sp"
+        android:orientation="horizontal"
+        android:layout_marginStart="250dp"
+        android:layout_marginTop="5dp"
+        android:padding="5dp"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tag4"
         android:layout_centerHorizontal="true"
         android:id="@+id/search_box"
-        android:background="@color/colorTheme"
+        android:background="@drawable/custom_edit_text"
         android:textColor="#FFF"
-        android:text="Search Box"/>
+        android:text="Search Ride"
+        android:layout_marginTop="20dp"/>
 
 </RelativeLayout>

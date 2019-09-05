@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/NewAppTheme">
-        <activity android:name=".SliderActivity"
+        <activity android:name=".TagSelectionActivity"></activity>
+        <activity
+            android:name=".SliderActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,17 +19,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ChatRoom"></activity>
-        <activity android:name=".JourneyPlan">
-        </activity>
+        <activity android:name=".ChatRoom" />
+        <activity android:name=".JourneyPlan" />
         <activity
             android:name=".RoomListActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".RoomActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".UserDetailsActivity">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".UserDetailsActivity" />
     </application>
 
 </manifest>

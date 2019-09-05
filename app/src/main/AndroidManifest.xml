@@ -23,11 +23,10 @@
         <activity android:name=".JourneyPlan" />
         <activity
             android:name=".RoomListActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".RoomActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".UserDetailsActivity" />
     </application>
 

@@ -4,8 +4,7 @@ public class User {
 
 
     public final static int IDLE=0;
-    public final static int AVAILABLE=1;
-    public final static int INAROOM=2;
+    public final static int INAROOM=1;
 
     public final static int MALE=0;
     public final static int FEMALE=0;

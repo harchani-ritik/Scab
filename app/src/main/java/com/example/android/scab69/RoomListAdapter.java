@@ -61,7 +61,7 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.RoomOb
     public void onBindViewHolder(@NonNull final RoomObjectHolder holder, final int position) {
 
         final Room room = RoomList.get(position);
-                holder.JoinRoom.setOnClickListener(new View.OnClickListener() {
+        holder.JoinRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String RequestedRoomId = room.getRoomId();
@@ -73,6 +73,8 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.RoomOb
                 tempUsers.add(JourneyPlan.mUser);
                 room.setTempUserList(tempUsers);
                 tempUserRef.setValue(room);
+
+                RoomListActivity.YourRoomsList.add(room);
             }
         });
     }

@@ -19,21 +19,20 @@ public class SliderActivity extends AppCompatActivity {
     Button SkipButton;
     private static ViewPager mPager;
     private static int currentPage = 0;
-    private static final Integer[] images = {R.drawable.image2, R.drawable.image1, R.drawable.ikia};
+    private static final Integer[] images = {R.drawable.aa, R.drawable.ab, R.drawable.ac};
     private ArrayList<Integer> imagesArray = new ArrayList<Integer>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slider);
-        SkipButton = (Button) findViewById(R.id.skip);
+        SkipButton = (Button) findViewById(R.id.skip_button);
         SkipButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(new Intent(SliderActivity.this, JourneyPlan.class));
                 intent.putExtra("sliderFlag",1);
                 startActivity(intent);
-
             }
         });
         init();

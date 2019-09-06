@@ -3,10 +3,13 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,7 +27,6 @@ import java.util.Date;
 public class RoomListActivity extends AppCompatActivity {
 
     static ArrayList<Room> YourRoomsList=new ArrayList<>();
-    ArrayList<Room> AvailableRoomsList;
     private static ArrayList<Room> FilterRoomsList;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference mRoomDatabaseReference;
@@ -43,7 +45,6 @@ public class RoomListActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         mRoomDatabaseReference = firebaseDatabase.getReference().child("rooms");
 
-        AvailableRoomsList=new ArrayList<>();
         FilterRoomsList=new ArrayList<>();
         fetchAvailableRooms();
 
@@ -53,16 +54,11 @@ public class RoomListActivity extends AppCompatActivity {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new RoomListAdapter(AvailableRoomsList,0);
-        mRecyclerView.setAdapter(mAdapter);
-
-
         Button createRoomButton = findViewById(R.id.create_room_button);
         createRoomButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                createNewRoom();
-
+                showConfirmationDialog();
                 /*Intent intent = new Intent(RoomListActivity.this,RoomActivity.class);
                 startActivity(intent);*/
             }
@@ -82,10 +78,39 @@ public class RoomListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(view.getContext(),"List of Selected Rooms",Toast.LENGTH_SHORT).show();
-                mAdapter= new RoomListAdapter(AvailableRoomsList,0);
+                mAdapter= new RoomListAdapter(FilterRoomsList,0);
                 mRecyclerView.setAdapter(mAdapter);
             }
         });
+    }
+
+    private void showConfirmationDialog() {
+        ViewGroup viewGroup = findViewById(android.R.id.content);
+
+        //then we will inflate the custom alert dialog xml that we created
+        final View dialogView = LayoutInflater.from(this).inflate(R.layout.room_creation_confirmation_dialog, viewGroup, false);
+
+        //Now we need an AlertDialog.Builder object
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        //setting the view of the builder to our custom view that we already inflated
+        builder.setView(dialogView);
+
+        //finally creating the alert dialog and displaying it
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+        Button button = dialogView.findViewById(R.id.confirm_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(view.getContext(),"Ok Clicked",Toast.LENGTH_SHORT).show();
+                alertDialog.dismiss();
+                createNewRoom();
+
+            }
+        });
+
     }
 
 
@@ -93,18 +118,18 @@ public class RoomListActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        ((RoomListAdapter) mAdapter).setOnItemClickListener(new RoomListAdapter.MyClickListener() {
+        /*((RoomListAdapter) mAdapter).setOnItemClickListener(new RoomListAdapter.MyClickListener() {
             @Override
             public void onItemClick(int position, View v) {
                 Log.i("QueryListActivity", " Clicked on Item " + position);
-                if (AvailableRoomsList.get(position) != null) {
+                /*if (AvailableRoomsList.get(position) != null) {
                     Intent intent = new Intent(RoomListActivity.this, RoomActivity.class);
                     intent.putExtra("position",position);
                     startActivity(intent);
 
                 }
             }
-        });
+        });*/
     }
 
     private void fetchAvailableRooms() {
@@ -115,15 +140,12 @@ public class RoomListActivity extends AppCompatActivity {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     Room room = dataSnapshot.getValue(Room.class);
-                    AvailableRoomsList.add(room);
                     if(room.getDestination().equals(Dest)&&room.getSource().equals(Src))
                     {
                         FilterRoomsList.add(room);
                         mAdapter = new RoomListAdapter(FilterRoomsList,0);
                         mRecyclerView.setAdapter(mAdapter);
                     }
-                    /*mAdapter = new RoomListAdapter(AvailableRoomsList,0);
-                    mRecyclerView.setAdapter(mAdapter);*/
                 }
 
                 public void onChildChanged(DataSnapshot dataSnapshot, String s) {

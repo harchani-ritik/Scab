@@ -5,6 +5,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
@@ -30,6 +31,7 @@ public class JourneyPlan extends AppCompatActivity implements AdapterView.OnItem
     String Source, Destination,Time;
     Button SearchRide;
 
+    public static User mUser= new User();
     public static final int RC_SIGN_IN = 1;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
@@ -49,7 +51,7 @@ public class JourneyPlan extends AppCompatActivity implements AdapterView.OnItem
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
-                    onSignedInSourceize(user.getPhoneNumber());
+                    onSignedInInitialize(user.getPhoneNumber());
                 } else {
                     // User is signed out
                     onSignedOutCleanup();
@@ -155,12 +157,12 @@ public class JourneyPlan extends AppCompatActivity implements AdapterView.OnItem
         if (mAuthStateListener != null)
             mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
     }
-    private void onSignedInSourceize(String phoneNumber) {
+    private void onSignedInInitialize(String phoneNumber) {
         //UserDetailsActivity.mUser.setPhoneNumber(phoneNumber);
         UserPhoneNumber=phoneNumber;
     }
     private void onSignedOutCleanup() {
-        UserDetailsActivity.mUser=null;
+        JourneyPlan.mUser=null;
         getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                 .putBoolean("isFirstRun", true).apply();
     }
@@ -230,4 +232,5 @@ public class JourneyPlan extends AppCompatActivity implements AdapterView.OnItem
     public void onNothingSelected(AdapterView<?> arg0) {
         // TODO Auto-generated method stub
     }
+
 }

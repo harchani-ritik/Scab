@@ -60,16 +60,19 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.RoomOb
     @Override
     public void onBindViewHolder(@NonNull final RoomObjectHolder holder, final int position) {
 
-        holder.JoinRoom.setOnClickListener(new View.OnClickListener() {
+        final Room room = RoomList.get(position);
+                holder.JoinRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String RequestedRoomId = RoomList.get(position).getRoomId();
-                String RequestedRoomTag = RoomList.get(position).getRoomTag();
+                String RequestedRoomId = room.getRoomId();
+                String RequestedRoomTag = room.getRoomTag();
                 FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
                 DatabaseReference tempUserRef = firebaseDatabase.getReference().
                         child("rooms").child(RequestedRoomTag).child(RequestedRoomId);
-                RoomList.get(position).setTempUser(UserDetailsActivity.getmUser());
-                tempUserRef.setValue(RoomList.get(position));
+                ArrayList<User> tempUsers = room.getTempUserList();
+                tempUsers.add(JourneyPlan.mUser);
+                room.setTempUserList(tempUsers);
+                tempUserRef.setValue(room);
             }
         });
     }

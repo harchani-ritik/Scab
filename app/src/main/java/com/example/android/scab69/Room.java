@@ -12,15 +12,13 @@ public class Room {
     private User user2=new User();
     private User user3=new User();
     private User user4=new User();
-    private ArrayList< User >tempUser;
     private String source;
     private String destination;
     private String roomTag;
     private String roomId;
-    private String jouneyTime;
+    private String journeyTime;
     private String roomCreationTime;
-
-
+    private ArrayList<User> tempUserList=new ArrayList<>();
 
     private int roomStatus;
 
@@ -34,7 +32,7 @@ public class Room {
         this.destination=destination;
         this.roomTag=roomTag;
         this.roomId=roomId;
-        tempUser=new ArrayList<>();
+        this.tempUserList=new ArrayList<>();
         user2=user3=user4=null;
     }
 
@@ -119,15 +117,19 @@ public class Room {
         this.roomId = roomId;
     }
 
-    public String getJouneyTime() {
-        return jouneyTime;
+    public String getJourneyTime() {
+        return journeyTime;
     }
 
-    public void setJouneyTime(String jouneyTime) {
-        this.jouneyTime = jouneyTime;
+    public void setJourneyTime(String journeyTime) {
+        this.journeyTime = journeyTime;
     }
 
-    public void setTempUser(User user) {
-        this.tempUser.add(user);
+    public ArrayList<User> getTempUserList() {
+        return tempUserList;
+    }
+
+    public void setTempUserList(ArrayList<User> tempUserList) {
+        this.tempUserList = tempUserList;
     }
 }

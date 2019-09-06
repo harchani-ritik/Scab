@@ -7,7 +7,6 @@ import androidx.core.app.NotificationManagerCompat;
 import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.os.Build;
@@ -17,9 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 import static android.view.View.GONE;
@@ -60,7 +57,7 @@ public class RoomActivity extends AppCompatActivity {
 
 
         //Calculating hour and minutes for journey time
-        String journeyTime = mRoom.getJouneyTime();
+        String journeyTime = mRoom.getJourneyTime();
         int hourFuture = Integer.parseInt(journeyTime.substring(0, 2));
         int minFuture = Integer.parseInt(journeyTime.substring(journeyTime.length() - 2));
 

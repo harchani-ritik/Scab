@@ -159,8 +159,9 @@ public class RoomListActivity extends AppCompatActivity {
         String timeToDisplay = dateFormatter.format(new Date(time));
 
         String roomId = mRoomDatabaseReference.push().getKey();
-        Room room = new Room(UserDetailsActivity.getmUser(),timeToDisplay,Src,Dest,Tag,roomId);
-        room.setUser1(UserDetailsActivity.getmUser());
+        Room room = new Room(JourneyPlan.mUser,timeToDisplay,Src,Dest,Tag,roomId);
+        room.setUser1(JourneyPlan.mUser);
+
         mRoomDatabaseReference.child(Tag).child(roomId).setValue(room);
     }
 

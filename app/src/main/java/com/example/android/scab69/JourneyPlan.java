@@ -1,19 +1,23 @@
 package com.example.android.scab69;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
@@ -22,9 +26,9 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Arrays;
 
-public class JourneyPlan extends AppCompatActivity {
-    EditText Initial, Destination,Time;
-    Button SearchBox;
+public class JourneyPlan extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+    String Source, Destination,Time;
+    Button SearchRide;
 
     public static final int RC_SIGN_IN = 1;
     private FirebaseAuth mFirebaseAuth;
@@ -32,6 +36,7 @@ public class JourneyPlan extends AppCompatActivity {
     private String UserPhoneNumber;
     public boolean isFirstRun,isFRun;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +49,7 @@ public class JourneyPlan extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
-                    onSignedInInitialize(user.getPhoneNumber());
+                    onSignedInSourceize(user.getPhoneNumber());
                 } else {
                     // User is signed out
                     onSignedOutCleanup();
@@ -63,25 +68,36 @@ public class JourneyPlan extends AppCompatActivity {
             }
         };
 
-        SearchBox = (Button) findViewById(R.id.search_box);
-        //Time=findViewById(R.id.time_to_arrive);
-        Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
-        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
-                R.array.planets_array, android.R.layout.simple_spinner_item);
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner2.setAdapter(adapter2);
+        SearchRide = (Button) findViewById(R.id.search_ride);
+
         Spinner spinner1 = (Spinner) findViewById(R.id.spinner1);
+        spinner1.setOnItemSelectedListener( this);
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,
                 R.array.planets_array, android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner1.setAdapter(adapter1);
-        SearchBox.setOnClickListener(new View.OnClickListener() {
+
+        Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
+        spinner2.setOnItemSelectedListener( this);
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
+                R.array.planets_array, android.R.layout.simple_spinner_item);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner2.setAdapter(adapter2);
+
+        final TimePicker timePicker = findViewById(R.id.journey_time_picker);
+
+        SearchRide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int hr = timePicker.getHour();
+                int min = timePicker.getMinute();
+                Time = hr+" : "+min;
+                Toast.makeText(view.getContext(),Time,Toast.LENGTH_SHORT).show();
+
                 Intent intent = new Intent(JourneyPlan.this,RoomListActivity.class);
-                intent.putExtra("dest",Destination.getText().toString());
-                intent.putExtra("src", Initial.getText().toString());
-                intent.putExtra("time","4:30");
+                intent.putExtra("dest",Destination);
+                intent.putExtra("src", Source);
+                intent.putExtra("time",Time);
                 intent.putExtra("tag","IIITA");
                 startActivity(intent);
             }
@@ -103,10 +119,10 @@ public class JourneyPlan extends AppCompatActivity {
 
     }
     private void checkSliderActivity() {
-        isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+        isFRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getBoolean("isFRun", true);
 
-        if (isFirstRun) {
+        if (isFRun) {
             Intent intent = new Intent(JourneyPlan.this, SliderActivity.class);
             startActivity(intent);
         }
@@ -139,7 +155,7 @@ public class JourneyPlan extends AppCompatActivity {
         if (mAuthStateListener != null)
             mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
     }
-    private void onSignedInInitialize(String phoneNumber) {
+    private void onSignedInSourceize(String phoneNumber) {
         //UserDetailsActivity.mUser.setPhoneNumber(phoneNumber);
         UserPhoneNumber=phoneNumber;
     }
@@ -194,5 +210,24 @@ public class JourneyPlan extends AppCompatActivity {
         intent.addCategory(Intent.CATEGORY_HOME);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+    
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        Spinner spin = (Spinner)parent;
+        Spinner spin2 = (Spinner)parent;
+        if(spin.getId() == R.id.spinner1)
+        {
+            Destination=parent.getItemAtPosition(position).toString();
+            Toast.makeText(this, "Your choose Dest:" + Destination,Toast.LENGTH_SHORT).show();
+        }
+        if(spin2.getId() == R.id.spinner2)
+        {
+            Source=parent.getItemAtPosition(position).toString();
+            Toast.makeText(this, "Your choose Source :" + Source,Toast.LENGTH_SHORT).show();
+        }
+    }
+    public void onNothingSelected(AdapterView<?> arg0) {
+        // TODO Auto-generated method stub
     }
 }

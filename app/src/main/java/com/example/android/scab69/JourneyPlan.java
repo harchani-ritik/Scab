@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
@@ -86,6 +88,63 @@ public class JourneyPlan extends AppCompatActivity implements AdapterView.OnItem
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner2.setAdapter(adapter2);
 
+        final TextView selectedTag1 = findViewById(R.id.tag1);
+        final TextView selectedTag2 = findViewById(R.id.tag2);
+        final TextView selectedTag3 = findViewById(R.id.tag3);
+        final TextView selectedTag4 = findViewById(R.id.tag4);
+
+        selectedTag1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GradientDrawable drawable1 = (GradientDrawable)selectedTag1.getBackground();
+                GradientDrawable drawable2 = (GradientDrawable)selectedTag2.getBackground();
+                GradientDrawable drawable3 = (GradientDrawable)selectedTag3.getBackground();
+                GradientDrawable drawable4 = (GradientDrawable)selectedTag4.getBackground();
+                drawable1.setColor(Color.parseColor("#4DB86F"));
+                drawable2.setColor(Color.parseColor("#C4C4C4"));
+                drawable3.setColor(Color.parseColor("#C4C4C4"));
+                drawable4.setColor(Color.parseColor("#C4C4C4"));
+            }
+        });
+        selectedTag2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GradientDrawable drawable1 = (GradientDrawable)selectedTag1.getBackground();
+                GradientDrawable drawable2 = (GradientDrawable)selectedTag2.getBackground();
+                GradientDrawable drawable3 = (GradientDrawable)selectedTag3.getBackground();
+                GradientDrawable drawable4 = (GradientDrawable)selectedTag4.getBackground();
+                drawable2.setColor(Color.parseColor("#4DB86F"));
+                drawable1.setColor(Color.parseColor("#C4C4C4"));
+                drawable3.setColor(Color.parseColor("#C4C4C4"));
+                drawable4.setColor(Color.parseColor("#C4C4C4"));
+            }
+        });
+        selectedTag3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GradientDrawable drawable1 = (GradientDrawable)selectedTag1.getBackground();
+                GradientDrawable drawable2 = (GradientDrawable)selectedTag2.getBackground();
+                GradientDrawable drawable3 = (GradientDrawable)selectedTag3.getBackground();
+                GradientDrawable drawable4 = (GradientDrawable)selectedTag4.getBackground();
+                drawable3.setColor(Color.parseColor("#4DB86F"));
+                drawable2.setColor(Color.parseColor("#C4C4C4"));
+                drawable1.setColor(Color.parseColor("#C4C4C4"));
+                drawable4.setColor(Color.parseColor("#C4C4C4"));
+            }
+        });
+        selectedTag4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GradientDrawable drawable1 = (GradientDrawable)selectedTag1.getBackground();
+                GradientDrawable drawable2 = (GradientDrawable)selectedTag2.getBackground();
+                GradientDrawable drawable3 = (GradientDrawable)selectedTag3.getBackground();
+                GradientDrawable drawable4 = (GradientDrawable)selectedTag4.getBackground();
+                drawable4.setColor(Color.parseColor("#4DB86F"));
+                drawable2.setColor(Color.parseColor("#C4C4C4"));
+                drawable3.setColor(Color.parseColor("#C4C4C4"));
+                drawable1.setColor(Color.parseColor("#C4C4C4"));
+            }
+        });
         final TimePicker timePicker = findViewById(R.id.journey_time_picker);
 
         SearchRide.setOnClickListener(new View.OnClickListener() {

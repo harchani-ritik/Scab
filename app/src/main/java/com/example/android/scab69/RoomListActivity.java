@@ -1,11 +1,13 @@
 package com.example.android.scab69;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+import android.graphics.Color;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -67,20 +69,28 @@ public class RoomListActivity extends AppCompatActivity {
                 startActivity(intent);*/
             }
         });
-        Button yourRooms = findViewById(R.id.yourRooms);
+        final Button yourRooms = findViewById(R.id.yourRooms);
+        final Button allRooms = findViewById(R.id.allRooms);
         yourRooms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                GradientDrawable drawable1 = (GradientDrawable)yourRooms.getBackground();
+                drawable1.setColor(Color.parseColor("#4DB86F"));
+                GradientDrawable drawable2 = (GradientDrawable)allRooms.getBackground();
+                drawable2.setColor(Color.parseColor("#C4C4C4"));
                 Toast.makeText(view.getContext(),"Fetched="+FilterRoomsList.size(),Toast.LENGTH_SHORT).show();
                 mAdapter= new RoomListAdapter(YourRoomsList,1);
                 mRecyclerView.setAdapter(mAdapter);
             }
         });
 
-        Button allRooms = findViewById(R.id.allRooms);
         allRooms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                GradientDrawable drawable1 = (GradientDrawable)allRooms.getBackground();
+                drawable1.setColor(Color.parseColor("#4DB86F"));
+                GradientDrawable drawable2 = (GradientDrawable)yourRooms.getBackground();
+                drawable2.setColor(Color.parseColor("#C4C4C4"));
                 Toast.makeText(view.getContext(),"List of Selected Rooms",Toast.LENGTH_SHORT).show();
                 mAdapter= new RoomListAdapter(AvailableRoomsList,0);
                 mRecyclerView.setAdapter(mAdapter);

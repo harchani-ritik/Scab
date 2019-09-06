@@ -4,9 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.os.Build;
@@ -16,15 +16,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 import static android.view.View.GONE;
 
 public class RoomActivity extends AppCompatActivity {
-    public int numberOfUsers = 0;
+    private int numberOfUsers = 0;
     Room mRoom;
     int RoomPosition;
 
@@ -50,18 +48,16 @@ public class RoomActivity extends AppCompatActivity {
 
         //Fetching Current Time
         Date d = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         String currentDateTimeString = sdf.format(d);
 
         //Calculating hour and minutes for current time
         int hourPresent = Integer.parseInt(currentDateTimeString.substring(0, 2));
         int minPresent = Integer.parseInt(currentDateTimeString.substring(currentDateTimeString.length() - 2));
 
-        //Creating object of Room
-        Room mRoom = new Room();
 
         //Calculating hour and minutes for journey time
-        String journeyTime = mRoom.getTime();
+        String journeyTime = mRoom.getJourneyTime();
         int hourFuture = Integer.parseInt(journeyTime.substring(0, 2));
         int minFuture = Integer.parseInt(journeyTime.substring(journeyTime.length() - 2));
 
@@ -112,7 +108,7 @@ public class RoomActivity extends AppCompatActivity {
         TextView roll4TextView = findViewById(R.id.roll4_text_view);
 
         //Adding users in the room
-        if(numberOfUsers== 0 && (mRoom.getUser1().getName() != "NOT_ASSIGNED") && (mRoom.getUser1().getStatus()==2)) {
+        if(numberOfUsers== 0 && (mRoom.getUser1().getStatus()==User.INAROOM)) {
             user1TextView.setText(mRoom.getUser1().getName());
             roll1TextView.setText(mRoom.getUser1().getCommunityStatus());
             numberOfUsers++;
@@ -122,7 +118,7 @@ public class RoomActivity extends AppCompatActivity {
             user1TextView.setVisibility(GONE);
             roll1TextView.setVisibility(GONE);
         }
-        if(numberOfUsers== 1 && (mRoom.getUser2().getName() != "NOT_ASSIGNED") && (mRoom.getUser2().getStatus()==2)) {
+        if(numberOfUsers== 1 && (mRoom.getUser2().getStatus()==2)) {
             user2TextView.setText(mRoom.getUser2().getName());
             roll2TextView.setText(mRoom.getUser1().getCommunityStatus());
             numberOfUsers++;
@@ -133,7 +129,7 @@ public class RoomActivity extends AppCompatActivity {
             roll2TextView.setVisibility(GONE);
         }
 
-        if(numberOfUsers== 2 && (mRoom.getUser3().getName() != "NOT_ASSIGNED") && (mRoom.getUser3().getStatus()==2)) {
+        if(numberOfUsers== 2  && (mRoom.getUser3().getStatus()==2)) {
             user3TextView.setText(mRoom.getUser3().getName());
             roll3TextView.setText(mRoom.getUser1().getCommunityStatus());
             numberOfUsers++;
@@ -144,7 +140,7 @@ public class RoomActivity extends AppCompatActivity {
             roll3TextView.setVisibility(GONE);
         }
 
-        if(numberOfUsers== 3 && (mRoom.getUser4().getName() != "NOT_ASSIGNED") && (mRoom.getUser4().getStatus()==2)) {
+        if(numberOfUsers== 3 && (mRoom.getUser4().getStatus()==2)) {
             user4TextView.setText(mRoom.getUser4().getName());
             roll4TextView.setText(mRoom.getUser1().getCommunityStatus());
             numberOfUsers++;

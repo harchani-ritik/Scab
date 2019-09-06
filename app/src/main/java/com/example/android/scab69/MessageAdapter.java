@@ -30,7 +30,7 @@ public class MessageAdapter extends ArrayAdapter<FriendlyMessage> {
             messageTextView.setVisibility(View.VISIBLE);
             messageTextView.setText(message.getText());
 
-        authorTextView.setText(UserDetailsActivity.getmUser().getName());
+        authorTextView.setText(JourneyPlan.mUser.getName());
 
         return convertView;
     }

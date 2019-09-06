@@ -10,15 +10,15 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:id="@+id/next"
+            android:id="@+id/skip"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="550dp"
+            android:layout_marginTop="575dp"
             android:background="@drawable/custom_edit_text"
             android:elevation="20dp"
             android:ellipsize="marquee"
-            android:text="NEXT"
+            android:text="SKIP"
             android:textColor="@color/white" />
 
         <androidx.viewpager.widget.ViewPager

@@ -11,7 +11,7 @@
         android:layout_width="410dp"
         android:layout_height="187dp"
         android:layout_gravity="center"
-        android:background="#000000"
+        android:background="#FFFFFF"
         card_view:layout_constraintBottom_toBottomOf="parent"
         card_view:layout_constraintEnd_toEndOf="parent"
         card_view:layout_constraintHorizontal_bias="0.0"
@@ -28,14 +28,16 @@
             android:text="Room Owner"
             android:textColor="#000000"
             android:textSize="16sp"
+            android:fontFamily="serif"
             android:visibility="visible" />
 
         <TextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="240dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginLeft="285dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="16dp"
             android:gravity="top"
             android:text="Aman Sokhal"
             android:textColor="#000000"
@@ -53,18 +55,106 @@
             android:textColor="#000000"
             android:textSize="20sp"
             android:visibility="visible" />
-
+        <ImageView
+            android:id="@+id/from_image"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/from_image"
+            android:layout_marginTop="80dp"
+            android:layout_marginLeft="170dp"/>
+        <ImageView
+            android:id="@+id/dot1"
+            android:layout_width="7dp"
+            android:layout_height="7dp"
+            android:src="@drawable/eclipse"
+            android:layout_marginTop="88dp"
+            android:layout_marginLeft="190dp"/>
+        <ImageView
+            android:id="@+id/dot2"
+            android:layout_width="7dp"
+            android:layout_height="7dp"
+            android:src="@drawable/eclipse"
+            android:layout_marginTop="88dp"
+            android:layout_marginLeft="200dp"/>
+        <ImageView
+            android:id="@+id/dot3"
+            android:layout_width="7dp"
+            android:layout_height="7dp"
+            android:src="@drawable/eclipse"
+            android:layout_marginTop="88dp"
+            android:layout_marginLeft="210dp"/>
+        <ImageView
+            android:id="@+id/dot4"
+            android:layout_width="7dp"
+            android:layout_height="7dp"
+            android:src="@drawable/eclipse"
+            android:layout_marginTop="88dp"
+            android:layout_marginLeft="220dp"/>
+        <ImageView
+            android:id="@+id/dot5"
+            android:layout_width="7dp"
+            android:layout_height="7dp"
+            android:src="@drawable/eclipse"
+            android:layout_marginTop="88dp"
+            android:layout_marginLeft="230dp"/>
+        <ImageView
+            android:id="@+id/dot6"
+            android:layout_width="7dp"
+            android:layout_height="7dp"
+            android:src="@drawable/eclipse"
+            android:layout_marginTop="88dp"
+            android:layout_marginLeft="240dp"/>
+        <ImageView
+            android:id="@+id/end_loc"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/to_image"
+            android:layout_marginTop="80dp"
+            android:layout_marginLeft="248dp"/>
         <TextView
             android:id="@+id/end"
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="240dp"
+            android:layout_marginLeft="350dp"
             android:layout_marginTop="80dp"
             android:gravity="top"
             android:text="PVR"
             android:textColor="#000000"
             android:textSize="20sp"
+            android:visibility="visible" />
+        <TextView
+            android:id="@+id/time_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="120dp"
+            android:gravity="top"
+            android:text="Time:5:00 pm"
+            android:textColor="#000000"
+            android:textSize="10sp"
+            android:visibility="visible" />
+        <TextView
+            android:id="@+id/time_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="190dp"
+            android:layout_marginTop="120dp"
+            android:gravity="top"
+            android:text="2 hr left"
+            android:textColor="#F72C25"
+            android:textSize="10sp"
+            android:visibility="visible" />
+        <TextView
+            android:id="@+id/community_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="270dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="120dp"
+            android:gravity="top"
+            android:text="Community:IIIT Allahabad"
+            android:textColor="#000000"
+            android:textSize="10sp"
             android:visibility="visible" />
 
         <Button
@@ -72,9 +162,9 @@
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:text="Join Room"
-            android:background="#4D886F"
+            android:background="@drawable/custom_edit_text2"
             android:textColor="#FFFFFF"
-            android:layout_marginTop="120dp"
+            android:layout_marginTop="150dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"/>
     </androidx.cardview.widget.CardView>

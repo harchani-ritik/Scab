@@ -92,59 +92,43 @@ public class JourneyPlan extends AppCompatActivity implements AdapterView.OnItem
         final TextView selectedTag2 = findViewById(R.id.tag2);
         final TextView selectedTag3 = findViewById(R.id.tag3);
         final TextView selectedTag4 = findViewById(R.id.tag4);
-
         selectedTag1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                GradientDrawable drawable1 = (GradientDrawable)selectedTag1.getBackground();
-                GradientDrawable drawable2 = (GradientDrawable)selectedTag2.getBackground();
-                GradientDrawable drawable3 = (GradientDrawable)selectedTag3.getBackground();
-                GradientDrawable drawable4 = (GradientDrawable)selectedTag4.getBackground();
-                drawable1.setColor(Color.parseColor("#4DB86F"));
-                drawable2.setColor(Color.parseColor("#C4C4C4"));
-                drawable3.setColor(Color.parseColor("#C4C4C4"));
-                drawable4.setColor(Color.parseColor("#C4C4C4"));
+                selectedTag1.setBackgroundResource(R.drawable.custom_edit_text);
+                selectedTag2.setBackgroundResource(R.drawable.custom_edit_text1);
+                selectedTag3.setBackgroundResource(R.drawable.custom_edit_text1);
+                selectedTag4.setBackgroundResource(R.drawable.custom_edit_text1);
             }
         });
         selectedTag2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                GradientDrawable drawable1 = (GradientDrawable)selectedTag1.getBackground();
-                GradientDrawable drawable2 = (GradientDrawable)selectedTag2.getBackground();
-                GradientDrawable drawable3 = (GradientDrawable)selectedTag3.getBackground();
-                GradientDrawable drawable4 = (GradientDrawable)selectedTag4.getBackground();
-                drawable2.setColor(Color.parseColor("#4DB86F"));
-                drawable1.setColor(Color.parseColor("#C4C4C4"));
-                drawable3.setColor(Color.parseColor("#C4C4C4"));
-                drawable4.setColor(Color.parseColor("#C4C4C4"));
+                selectedTag1.setBackgroundResource(R.drawable.custom_edit_text1);
+                selectedTag2.setBackgroundResource(R.drawable.custom_edit_text);
+                selectedTag3.setBackgroundResource(R.drawable.custom_edit_text1);
+                selectedTag4.setBackgroundResource(R.drawable.custom_edit_text1);
             }
         });
         selectedTag3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                GradientDrawable drawable1 = (GradientDrawable)selectedTag1.getBackground();
-                GradientDrawable drawable2 = (GradientDrawable)selectedTag2.getBackground();
-                GradientDrawable drawable3 = (GradientDrawable)selectedTag3.getBackground();
-                GradientDrawable drawable4 = (GradientDrawable)selectedTag4.getBackground();
-                drawable3.setColor(Color.parseColor("#4DB86F"));
-                drawable2.setColor(Color.parseColor("#C4C4C4"));
-                drawable1.setColor(Color.parseColor("#C4C4C4"));
-                drawable4.setColor(Color.parseColor("#C4C4C4"));
+                selectedTag1.setBackgroundResource(R.drawable.custom_edit_text1);
+                selectedTag2.setBackgroundResource(R.drawable.custom_edit_text1);
+                selectedTag3.setBackgroundResource(R.drawable.custom_edit_text);
+                selectedTag4.setBackgroundResource(R.drawable.custom_edit_text1);
             }
         });
         selectedTag4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                GradientDrawable drawable1 = (GradientDrawable)selectedTag1.getBackground();
-                GradientDrawable drawable2 = (GradientDrawable)selectedTag2.getBackground();
-                GradientDrawable drawable3 = (GradientDrawable)selectedTag3.getBackground();
-                GradientDrawable drawable4 = (GradientDrawable)selectedTag4.getBackground();
-                drawable4.setColor(Color.parseColor("#4DB86F"));
-                drawable2.setColor(Color.parseColor("#C4C4C4"));
-                drawable3.setColor(Color.parseColor("#C4C4C4"));
-                drawable1.setColor(Color.parseColor("#C4C4C4"));
+                selectedTag1.setBackgroundResource(R.drawable.custom_edit_text1);
+                selectedTag2.setBackgroundResource(R.drawable.custom_edit_text1);
+                selectedTag3.setBackgroundResource(R.drawable.custom_edit_text1);
+                selectedTag4.setBackgroundResource(R.drawable.custom_edit_text);
             }
         });
+
         final TimePicker timePicker = findViewById(R.id.journey_time_picker);
 
         SearchRide.setOnClickListener(new View.OnClickListener() {

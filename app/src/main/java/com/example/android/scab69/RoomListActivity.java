@@ -74,10 +74,8 @@ public class RoomListActivity extends AppCompatActivity {
         yourRooms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                GradientDrawable drawable1 = (GradientDrawable)yourRooms.getBackground();
-                drawable1.setColor(Color.parseColor("#4DB86F"));
-                GradientDrawable drawable2 = (GradientDrawable)allRooms.getBackground();
-                drawable2.setColor(Color.parseColor("#C4C4C4"));
+                yourRooms.setBackgroundResource(R.drawable.custom_edit_text);
+                allRooms.setBackgroundResource(R.drawable.custom_edit_text1);
                 Toast.makeText(view.getContext(),"Fetched="+FilterRoomsList.size(),Toast.LENGTH_SHORT).show();
                 mAdapter= new RoomListAdapter(YourRoomsList,1);
                 mRecyclerView.setAdapter(mAdapter);
@@ -87,10 +85,8 @@ public class RoomListActivity extends AppCompatActivity {
         allRooms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                GradientDrawable drawable1 = (GradientDrawable)allRooms.getBackground();
-                drawable1.setColor(Color.parseColor("#4DB86F"));
-                GradientDrawable drawable2 = (GradientDrawable)yourRooms.getBackground();
-                drawable2.setColor(Color.parseColor("#C4C4C4"));
+                allRooms.setBackgroundResource(R.drawable.custom_edit_text);
+                yourRooms.setBackgroundResource(R.drawable.custom_edit_text1);
                 Toast.makeText(view.getContext(),"List of Selected Rooms",Toast.LENGTH_SHORT).show();
                 mAdapter= new RoomListAdapter(AvailableRoomsList,0);
                 mRecyclerView.setAdapter(mAdapter);

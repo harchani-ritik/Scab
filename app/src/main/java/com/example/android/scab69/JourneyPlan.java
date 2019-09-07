@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
@@ -86,6 +88,47 @@ public class JourneyPlan extends AppCompatActivity implements AdapterView.OnItem
                 R.array.planets_array, android.R.layout.simple_spinner_item);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner2.setAdapter(adapter2);
+
+        final TextView selectedTag1 = findViewById(R.id.tag1);
+        final TextView selectedTag2 = findViewById(R.id.tag2);
+        final TextView selectedTag3 = findViewById(R.id.tag3);
+        final TextView selectedTag4 = findViewById(R.id.tag4);
+        selectedTag1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectedTag1.setBackgroundResource(R.drawable.custom_edit_text);
+                selectedTag2.setBackgroundResource(R.drawable.custom_edit_text1);
+                selectedTag3.setBackgroundResource(R.drawable.custom_edit_text1);
+                selectedTag4.setBackgroundResource(R.drawable.custom_edit_text1);
+            }
+        });
+        selectedTag2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectedTag1.setBackgroundResource(R.drawable.custom_edit_text1);
+                selectedTag2.setBackgroundResource(R.drawable.custom_edit_text);
+                selectedTag3.setBackgroundResource(R.drawable.custom_edit_text1);
+                selectedTag4.setBackgroundResource(R.drawable.custom_edit_text1);
+            }
+        });
+        selectedTag3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectedTag1.setBackgroundResource(R.drawable.custom_edit_text1);
+                selectedTag2.setBackgroundResource(R.drawable.custom_edit_text1);
+                selectedTag3.setBackgroundResource(R.drawable.custom_edit_text);
+                selectedTag4.setBackgroundResource(R.drawable.custom_edit_text1);
+            }
+        });
+        selectedTag4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectedTag1.setBackgroundResource(R.drawable.custom_edit_text1);
+                selectedTag2.setBackgroundResource(R.drawable.custom_edit_text1);
+                selectedTag3.setBackgroundResource(R.drawable.custom_edit_text1);
+                selectedTag4.setBackgroundResource(R.drawable.custom_edit_text);
+            }
+        });
 
         final TimePicker timePicker = findViewById(R.id.journey_time_picker);
 

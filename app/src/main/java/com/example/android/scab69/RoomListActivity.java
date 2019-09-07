@@ -1,6 +1,7 @@
 package com.example.android.scab69;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.drawable.GradientDrawable;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.graphics.Color;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -71,19 +73,25 @@ public class RoomListActivity extends AppCompatActivity {
                 startActivity(intent);*/
             }
         });
-        Button yourRooms = findViewById(R.id.yourRooms);
+        final Button yourRooms = findViewById(R.id.yourRooms);
+        final Button allRooms = findViewById(R.id.allRooms);
         yourRooms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                yourRooms.setBackgroundResource(R.drawable.custom_edit_text);
+                allRooms.setBackgroundResource(R.drawable.custom_edit_text1);
                 mAdapter= new RoomListAdapter(YourRoomsList,RoomListAdapter.YourRoomsList);
                 mRecyclerView.setAdapter(mAdapter);
             }
         });
 
-        Button allRooms = findViewById(R.id.allRooms);
         allRooms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                allRooms.setBackgroundResource(R.drawable.custom_edit_text);
+                yourRooms.setBackgroundResource(R.drawable.custom_edit_text1);
                 mAdapter= new RoomListAdapter(FilterRoomsList,RoomListAdapter.FilterRoomsList);
                 mRecyclerView.setAdapter(mAdapter);
             }

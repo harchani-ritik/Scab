@@ -100,7 +100,7 @@ public class JourneyPlan extends AppCompatActivity implements AdapterView.OnItem
                     int hr = timePicker.getHour();
                     int min = timePicker.getMinute();
                     Time = hr + " : " + min;
-                    Toast.makeText(view.getContext(), Time, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(view.getContext(), Time, Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(JourneyPlan.this, RoomListActivity.class);
                     intent.putExtra("dest", Destination);

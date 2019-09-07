@@ -1,12 +1,14 @@
 package com.example.android.scab69;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,15 +35,18 @@ public class RoomListActivity extends AppCompatActivity {
     DatabaseReference mRoomDatabaseReference;
     ChildEventListener mChildEventListener;
 
-    private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private static RecyclerView mRecyclerView;
+    private static RecyclerView.Adapter mAdapter;
 
+    @SuppressLint("StaticFieldLeak")
+    public static LinearLayout RoomListRootView;
     private String Dest,Src,JourneyTime,Tag;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room_list);
 
+        RoomListRootView=findViewById(R.id.roomListRootView);
         getIncomingIntent();
         firebaseDatabase = FirebaseDatabase.getInstance();
         mRoomDatabaseReference = firebaseDatabase.getReference().child("rooms");
@@ -60,7 +65,9 @@ public class RoomListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 showConfirmationDialog();
-                /*Intent intent = new Intent(RoomListActivity.this,RoomActivity.class);
+                JourneyPlan.mUser.setStatus(User.INAROOM);
+                /*
+                Intent intent = new Intent(RoomListActivity.this,RoomActivity.class);
                 startActivity(intent);*/
             }
         });
@@ -68,8 +75,7 @@ public class RoomListActivity extends AppCompatActivity {
         yourRooms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(),"Fetched="+FilterRoomsList.size(),Toast.LENGTH_SHORT).show();
-                mAdapter= new RoomListAdapter(YourRoomsList,1);
+                mAdapter= new RoomListAdapter(YourRoomsList,RoomListAdapter.YourRoomsList);
                 mRecyclerView.setAdapter(mAdapter);
             }
         });
@@ -78,8 +84,7 @@ public class RoomListActivity extends AppCompatActivity {
         allRooms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(),"List of Selected Rooms",Toast.LENGTH_SHORT).show();
-                mAdapter= new RoomListAdapter(FilterRoomsList,0);
+                mAdapter= new RoomListAdapter(FilterRoomsList,RoomListAdapter.FilterRoomsList);
                 mRecyclerView.setAdapter(mAdapter);
             }
         });
@@ -119,7 +124,6 @@ public class RoomListActivity extends AppCompatActivity {
                 //Toast.makeText(view.getContext(),"Ok Clicked",Toast.LENGTH_SHORT).show();
                 alertDialog.dismiss();
                 createNewRoom();
-
             }
         });
 
@@ -129,23 +133,24 @@ public class RoomListActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        mAdapter= new RoomListAdapter(FilterRoomsList,RoomListAdapter.FilterRoomsList);
+        mRecyclerView.setAdapter(mAdapter);
 
-        /*((RoomListAdapter) mAdapter).setOnItemClickListener(new RoomListAdapter.MyClickListener() {
+        ((RoomListAdapter) mAdapter).setOnItemClickListener(new RoomListAdapter.MyClickListener() {
             @Override
             public void onItemClick(int position, View v) {
                 Log.i("QueryListActivity", " Clicked on Item " + position);
-                /*if (AvailableRoomsList.get(position) != null) {
+                if (FilterRoomsList.get(position) != null) {
                     Intent intent = new Intent(RoomListActivity.this, RoomActivity.class);
                     intent.putExtra("position",position);
                     startActivity(intent);
-
                 }
             }
-        });*/
+        });
     }
 
     private void fetchAvailableRooms() {
-        Toast.makeText(RoomListActivity.this, "Fetching Rooms", Toast.LENGTH_SHORT).show();
+        Toast.makeText(RoomListActivity.this, "Searching Rooms", Toast.LENGTH_SHORT).show();
         DatabaseReference myRoomsDatabaseReference = mRoomDatabaseReference.child(Tag);
         if (mChildEventListener == null) {
             mChildEventListener = new ChildEventListener() {
@@ -201,6 +206,12 @@ public class RoomListActivity extends AppCompatActivity {
 
     public static Room getRoomFromRoomsList(int position) {
         return FilterRoomsList.get(position);
+    }
+
+    public static void removeRoomFromRoomsList(int position) {
+        FilterRoomsList.remove(position);
+        mAdapter= new RoomListAdapter(FilterRoomsList,RoomListAdapter.FilterRoomsList);
+        mRecyclerView.setAdapter(mAdapter);
     }
 }
 

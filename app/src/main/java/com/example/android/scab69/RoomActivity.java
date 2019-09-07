@@ -31,13 +31,17 @@ public class RoomActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room);
 
+        Button chatButton = findViewById(R.id.chat_button);
+        Button bookRideButton = findViewById(R.id.book_ride_button);
+
         if(getIntent().hasExtra("position")) {
             RoomPosition= getIntent().getIntExtra("position", 0);
             mRoom = RoomListActivity.getRoomFromRoomsList(RoomPosition);
+            chatButton.setVisibility(GONE);
+            bookRideButton.setVisibility(GONE);
         }
 
-        Button button = findViewById(R.id.chat_button);
-        button.setOnClickListener(new View.OnClickListener() {
+        chatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(RoomActivity.this,ChatRoom.class);

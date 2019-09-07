@@ -79,7 +79,7 @@
 
         <TextView
             android:id="@+id/confirm_src"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
@@ -91,9 +91,9 @@
 
         <TextView
             android:id="@+id/confirm_dest"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="200dp"
+            android:layout_marginStart="210dp"
             android:layout_marginTop="20dp"
             android:gravity="top"
             android:text="MNNIT Allahabad"
@@ -106,7 +106,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="70dp"
             android:gravity="top"
             android:text="Time:5:00 pm"
             android:textColor="#000000"
@@ -118,7 +118,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="180dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="70dp"
             android:layout_marginRight="20dp"
             android:gravity="top"
             android:text="IIIT Allahabad"

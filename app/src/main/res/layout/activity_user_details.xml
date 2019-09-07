@@ -10,7 +10,7 @@
         android:layout_width="96dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="88dp"
-        android:background="#4DB86F"
+        android:background="@drawable/custom_edit_text"
         android:text="Proceed"
         android:textColor="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"

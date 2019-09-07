@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="410dp"
+        android:layout_height="190dp"
+        android:layout_gravity="center"
+        android:background="#FFFFFF"
+        card_view:layout_constraintBottom_toBottomOf="parent"
+        card_view:layout_constraintEnd_toEndOf="parent"
+        card_view:layout_constraintHorizontal_bias="0.0"
+        card_view:layout_constraintStart_toStartOf="parent"
+        card_view:layout_constraintTop_toTopOf="parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="27dp"
+            android:paddingTop="15dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/user_image" />
+
+            <TextView
+                android:id="@+id/user2_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="Vineet Mankar"
+                android:textColor="#000"
+                android:paddingLeft="17dp"
+                android:textSize="20sp"
+                android:visibility="visible"/>
+
+            <TextView
+                android:id="@+id/roll2_text_view"
+                android:layout_width="15dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:layout_weight="1"
+                android:textColor="#000"
+                android:fontFamily="serif"
+                android:text="iec2017052"
+                android:textSize="15sp"
+                android:visibility="visible"/>
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/time_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="60dp"
+            android:gravity="top"
+            android:fontFamily="serif"
+            android:text="Age : 22 years"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            android:visibility="visible" />
+        <TextView
+            android:id="@+id/community_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="300dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="60dp"
+            android:gravity="top"
+            android:fontFamily="serif"
+            android:text="Gender : Male"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="80dp"
+            android:gravity="top"
+            android:text="IIIT Allahabad"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:visibility="visible" />
+        <ImageView
+            android:id="@+id/from_image"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/from_image"
+            android:layout_marginTop="80dp"
+            android:layout_marginLeft="170dp"/>
+        <ImageView
+            android:id="@+id/dot1"
+            android:layout_width="7dp"
+            android:layout_height="7dp"
+            android:src="@drawable/eclipse"
+            android:layout_marginTop="88dp"
+            android:layout_marginLeft="190dp"/>
+        <ImageView
+            android:id="@+id/dot2"
+            android:layout_width="7dp"
+            android:layout_height="7dp"
+            android:src="@drawable/eclipse"
+            android:layout_marginTop="88dp"
+            android:layout_marginLeft="200dp"/>
+        <ImageView
+            android:id="@+id/dot3"
+            android:layout_width="7dp"
+            android:layout_height="7dp"
+            android:src="@drawable/eclipse"
+            android:layout_marginTop="88dp"
+            android:layout_marginLeft="210dp"/>
+        <ImageView
+            android:id="@+id/dot4"
+            android:layout_width="7dp"
+            android:layout_height="7dp"
+            android:src="@drawable/eclipse"
+            android:layout_marginTop="88dp"
+            android:layout_marginLeft="220dp"/>
+        <ImageView
+            android:id="@+id/dot5"
+            android:layout_width="7dp"
+            android:layout_height="7dp"
+            android:src="@drawable/eclipse"
+            android:layout_marginTop="88dp"
+            android:layout_marginLeft="230dp"/>
+        <ImageView
+            android:id="@+id/dot6"
+            android:layout_width="7dp"
+            android:layout_height="7dp"
+            android:src="@drawable/eclipse"
+            android:layout_marginTop="88dp"
+            android:layout_marginLeft="240dp"/>
+        <ImageView
+            android:id="@+id/end_loc"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/to_image"
+            android:layout_marginTop="80dp"
+            android:layout_marginLeft="248dp"/>
+        <TextView
+            android:id="@+id/end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="320dp"
+            android:layout_marginTop="80dp"
+            android:gravity="top"
+            android:text="PVR"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:visibility="visible" />
+        <Button
+            android:id="@+id/join_room_button"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="Add him to room"
+            android:background="@drawable/custom_edit_text2"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="150dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

@@ -25,13 +25,16 @@ public class Room {
     public Room(){
     }
 
-    public Room(User user1,String roomCreationTime,String source,String destination,String roomTag,String roomId){
+    public Room(User user1,String roomCreationTime,String source,String destination,String roomTag,String roomId,String journeyTime){
         this.user1=user1;
         this.roomCreationTime=roomCreationTime;
         this.source=source;
         this.destination=destination;
         this.roomTag=roomTag;
         this.roomId=roomId;
+        this.journeyTime=journeyTime;
+        this.roomStatus=Room.VACANT;
+
         this.tempUserList=new ArrayList<>();
         user2=user3=user4=null;
     }

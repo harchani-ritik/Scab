@@ -13,14 +13,14 @@
         <activity
             android:name=".SliderActivity"
             android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity android:name=".ChatRoom" />
-        <activity android:name=".JourneyPlan" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".ChatRoom" />
+        <activity android:name=".JourneyPlan" >
         </activity>
         <activity
             android:name=".RoomListActivity"

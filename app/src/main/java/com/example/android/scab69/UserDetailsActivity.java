@@ -88,6 +88,7 @@ public class UserDetailsActivity extends AppCompatActivity {
 
                 if(proceedFlag==1) {
                     updateUsersDatabase();
+                    JourneyPlan.mUser=mUser;
                     Intent intent = new Intent(UserDetailsActivity.this, JourneyPlan.class);
                     intent.putExtra("detailFlag",1);
                     startActivity(intent);

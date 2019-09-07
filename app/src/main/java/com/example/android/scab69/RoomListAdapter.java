@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -20,17 +21,24 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.RoomOb
     
     private ArrayList<Room> RoomList;
     private static MyClickListener myClickListener;
-    private static int flag;
+    static final int YourRoomsList =1;
+    static final int FilterRoomsList =0;
+    int mFlag;
 
     public static class RoomObjectHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener
     {
-        TextView JoinRoom;
+        TextView JoinRoom,Owner,Tag,Dest,Src,JourneyTime;
 
         public RoomObjectHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
             JoinRoom=(TextView)itemView.findViewById(R.id.join_room_button);
+            Owner=itemView.findViewById(R.id.card_owner);
+            Tag=itemView.findViewById(R.id.card_tag);
+            Dest=itemView.findViewById(R.id.card_dest);
+            Src=itemView.findViewById(R.id.card_src);
+            JourneyTime=itemView.findViewById(R.id.card_journey_time);
         }
 
         @Override
@@ -46,7 +54,7 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.RoomOb
 
     public RoomListAdapter(ArrayList<Room> myDataset,int flag) {
         RoomList = myDataset;
-        this.flag=flag;
+        mFlag = flag;
     }
 
     @Override
@@ -61,20 +69,36 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.RoomOb
     public void onBindViewHolder(@NonNull final RoomObjectHolder holder, final int position) {
 
         final Room room = RoomList.get(position);
-                holder.JoinRoom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String RequestedRoomId = room.getRoomId();
-                String RequestedRoomTag = room.getRoomTag();
-                FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                DatabaseReference tempUserRef = firebaseDatabase.getReference().
-                        child("rooms").child(RequestedRoomTag).child(RequestedRoomId);
-                ArrayList<User> tempUsers = room.getTempUserList();
-                tempUsers.add(JourneyPlan.mUser);
-                room.setTempUserList(tempUsers);
-                tempUserRef.setValue(room);
-            }
-        });
+        if(mFlag==RoomListAdapter.YourRoomsList)
+        {
+            holder.JoinRoom.setBackgroundResource(R.drawable.custom_edit_text3);
+            holder.JoinRoom.setText("Pending Request");
+        }
+        else{
+            holder.JoinRoom.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String RequestedRoomId = room.getRoomId();
+                    String RequestedRoomTag = room.getRoomTag();
+                    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                    DatabaseReference tempUserRef = firebaseDatabase.getReference().
+                            child("rooms").child(RequestedRoomTag).child(RequestedRoomId);
+                    ArrayList<User> tempUsers = room.getTempUserList();
+                    tempUsers.add(JourneyPlan.mUser);
+                    room.setTempUserList(tempUsers);
+                    tempUserRef.setValue(room);
+                    Snackbar.make(RoomListActivity.RoomListRootView, "REQUEST SENT TO OWNER", Snackbar.LENGTH_SHORT).show();
+                    RoomListActivity.YourRoomsList.add(room);
+                    RoomListActivity.removeRoomFromRoomsList(position);
+                }
+            });
+        }
+
+        holder.Owner.setText(room.getUser1().getName());
+        holder.Src.setText(room.getSource());
+        holder.Dest.setText(room.getDestination());
+        holder.Tag.setText(room.getRoomTag());
+        holder.JourneyTime.setText("Time: "+room.getJourneyTime());
     }
 
     public void addItem(Room dataObj, int index) {

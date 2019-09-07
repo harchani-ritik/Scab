@@ -82,11 +82,10 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.RoomOb
                     String RequestedRoomTag = room.getRoomTag();
                     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
                     DatabaseReference tempUserRef = firebaseDatabase.getReference().
-                            child("rooms").child(RequestedRoomTag).child(RequestedRoomId);
-                    ArrayList<User> tempUsers = room.getTempUserList();
-                    tempUsers.add(JourneyPlan.mUser);
-                    room.setTempUserList(tempUsers);
-                    tempUserRef.setValue(room);
+                            child("rooms").child(RequestedRoomTag).child(RequestedRoomId).
+                            child("TempUsers").child(JourneyPlan.mUser.getUid());
+                    JourneyPlan.mUser.setUserRequestStatus(User.PENDING);
+                    tempUserRef.setValue(JourneyPlan.mUser);
                     Snackbar.make(RoomListActivity.RoomListRootView, "REQUEST SENT TO OWNER", Snackbar.LENGTH_SHORT).show();
                     RoomListActivity.YourRoomsList.add(room);
                     RoomListActivity.removeRoomFromRoomsList(position);

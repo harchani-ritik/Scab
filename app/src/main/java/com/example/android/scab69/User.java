@@ -6,6 +6,10 @@ public class User {
     public final static int IDLE=0;
     public final static int INAROOM=1;
 
+    public final static int PENDING=0;
+    public final static int DECLINED=2;
+    public final static int ACCEPTED=1;
+
     public final static int MALE=0;
     public final static int FEMALE=0;
 
@@ -17,7 +21,7 @@ public class User {
     private String uid;
     //basically community status is an additional variable which we will use here for storing Roll Number
     private int userStatus;
-
+    private int userRequestStatus;
 
     public User(){
     }
@@ -78,5 +82,13 @@ public class User {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public int getUserRequestStatus() {
+        return userRequestStatus;
+    }
+
+    public void setUserRequestStatus(int userRequestStatus) {
+        this.userRequestStatus = userRequestStatus;
     }
 }

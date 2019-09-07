@@ -46,6 +46,7 @@ public class JourneyPlan extends AppCompatActivity implements AdapterView.OnItem
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_journey_plan);
 
+        fillInTempData();
         mFirebaseAuth=FirebaseAuth.getInstance();
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -167,6 +168,16 @@ public class JourneyPlan extends AppCompatActivity implements AdapterView.OnItem
 
     }
 
+    private void  fillInTempData() {
+        mUser.setName("Anonymous");
+        mUser.setPhoneNumber("100");
+        mUser.setCommunityStatus("99");
+        mUser.setAge(18);
+        mUser.setGender(User.MALE);
+        mUser.setUid("-Lkaajaminal");
+        mUser.setStatus(User.IDLE);
+    }
+
     private void checkUserDetails() {
        isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getBoolean("isFirstRun", true);
@@ -280,12 +291,10 @@ public class JourneyPlan extends AppCompatActivity implements AdapterView.OnItem
         if(spin.getId() == R.id.spinner1)
         {
             Destination=parent.getItemAtPosition(position).toString();
-            Toast.makeText(this, "Your choose Dest:" + Destination,Toast.LENGTH_SHORT).show();
         }
         if(spin2.getId() == R.id.spinner2)
         {
             Source=parent.getItemAtPosition(position).toString();
-            Toast.makeText(this, "Your choose Source :" + Source,Toast.LENGTH_SHORT).show();
         }
     }
     public void onNothingSelected(AdapterView<?> arg0) {

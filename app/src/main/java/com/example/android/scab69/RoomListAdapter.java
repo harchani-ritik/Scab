@@ -20,17 +20,21 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.RoomOb
     
     private ArrayList<Room> RoomList;
     private static MyClickListener myClickListener;
-    private static int flag;
 
     public static class RoomObjectHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener
     {
-        TextView JoinRoom;
+        TextView JoinRoom,Owner,Tag,Dest,Src,JourneyTime;
 
         public RoomObjectHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
             JoinRoom=(TextView)itemView.findViewById(R.id.join_room_button);
+            Owner=itemView.findViewById(R.id.card_owner);
+            Tag=itemView.findViewById(R.id.card_tag);
+            Dest=itemView.findViewById(R.id.card_dest);
+            Src=itemView.findViewById(R.id.card_src);
+            JourneyTime=itemView.findViewById(R.id.card_journey_time);
         }
 
         @Override
@@ -46,7 +50,6 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.RoomOb
 
     public RoomListAdapter(ArrayList<Room> myDataset,int flag) {
         RoomList = myDataset;
-        this.flag=flag;
     }
 
     @Override
@@ -77,6 +80,11 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.RoomOb
                 RoomListActivity.YourRoomsList.add(room);
             }
         });
+        holder.Owner.setText(room.getUser1().getName());
+        holder.Src.setText(room.getSource());
+        holder.Dest.setText(room.getDestination());
+        holder.Tag.setText(room.getRoomTag());
+        holder.JourneyTime.setText("Time:"+room.getJourneyTime());
     }
 
     public void addItem(Room dataObj, int index) {

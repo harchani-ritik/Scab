@@ -92,17 +92,23 @@ public class JourneyPlan extends AppCompatActivity implements AdapterView.OnItem
         SearchRide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int hr = timePicker.getHour();
-                int min = timePicker.getMinute();
-                Time = hr+" : "+min;
-                Toast.makeText(view.getContext(),Time,Toast.LENGTH_SHORT).show();
+                if(Source.equals(Destination))
+                {
+                    Toast.makeText(view.getContext(),"Source and Destination cannot be Same",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    int hr = timePicker.getHour();
+                    int min = timePicker.getMinute();
+                    Time = hr + " : " + min;
+                    Toast.makeText(view.getContext(), Time, Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(JourneyPlan.this,RoomListActivity.class);
-                intent.putExtra("dest",Destination);
-                intent.putExtra("src", Source);
-                intent.putExtra("time",Time);
-                intent.putExtra("tag","IIITA");
-                startActivity(intent);
+                    Intent intent = new Intent(JourneyPlan.this, RoomListActivity.class);
+                    intent.putExtra("dest", Destination);
+                    intent.putExtra("src", Source);
+                    intent.putExtra("time", Time);
+                    intent.putExtra("tag", "IIITA");
+                    startActivity(intent);
+                }
             }
         });
 

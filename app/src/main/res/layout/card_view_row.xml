@@ -32,7 +32,7 @@
             android:visibility="visible" />
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/card_owner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="240dp"
@@ -44,7 +44,7 @@
             android:visibility="visible" />
 
         <TextView
-            android:id="@+id/start"
+            android:id="@+id/card_src"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -111,7 +111,7 @@
             android:layout_marginTop="80dp"
             android:layout_marginLeft="248dp"/>
         <TextView
-            android:id="@+id/end"
+            android:id="@+id/card_dest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="300dp"
@@ -122,7 +122,7 @@
             android:textSize="20sp"
             android:visibility="visible" />
         <TextView
-            android:id="@+id/time_start"
+            android:id="@+id/card_journey_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -144,7 +144,7 @@
             android:textSize="10sp"
             android:visibility="visible" />
         <TextView
-            android:id="@+id/community_status"
+            android:id="@+id/card_tag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="280dp"

@@ -78,7 +78,7 @@
             android:src="@drawable/to_image" />
 
         <TextView
-            android:id="@+id/src_confirm"
+            android:id="@+id/confirm_src"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -90,7 +90,7 @@
             android:visibility="visible" />
 
         <TextView
-            android:id="@+id/dest_confirm"
+            android:id="@+id/confirm_dest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="200dp"
@@ -102,7 +102,7 @@
             android:visibility="visible" />
 
         <TextView
-            android:id="@+id/time_start"
+            android:id="@+id/confirm_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -114,7 +114,7 @@
             android:visibility="visible" />
 
         <TextView
-            android:id="@+id/tag_confirm"
+            android:id="@+id/confirm_tag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="180dp"

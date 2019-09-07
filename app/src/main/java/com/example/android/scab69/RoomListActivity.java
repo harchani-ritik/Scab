@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -100,11 +101,22 @@ public class RoomListActivity extends AppCompatActivity {
         final AlertDialog alertDialog = builder.create();
         alertDialog.show();
 
+        TextView confirmSrc,confirmDest,confirmTag,confirmTime;
+        confirmSrc=dialogView.findViewById(R.id.confirm_src);
+        confirmDest=dialogView.findViewById(R.id.confirm_dest);
+        confirmTag=dialogView.findViewById(R.id.confirm_tag);
+        confirmTime=dialogView.findViewById(R.id.confirm_time);
+
+        confirmSrc.setText(Src);
+        confirmDest.setText(Dest);
+        confirmTag.setText("Tag: "+Tag);
+        confirmTime.setText("Time: "+JourneyTime);
+
         Button button = dialogView.findViewById(R.id.confirm_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(),"Ok Clicked",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(view.getContext(),"Ok Clicked",Toast.LENGTH_SHORT).show();
                 alertDialog.dismiss();
                 createNewRoom();
 
@@ -140,7 +152,7 @@ public class RoomListActivity extends AppCompatActivity {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     Room room = dataSnapshot.getValue(Room.class);
-                    if(room.getDestination().equals(Dest)&&room.getSource().equals(Src))
+                    if(room.getDestination().equals(Dest)&&room.getSource().equals(Src)&&room.getRoomStatus()==Room.VACANT)
                     {
                         FilterRoomsList.add(room);
                         mAdapter = new RoomListAdapter(FilterRoomsList,0);
@@ -172,7 +184,7 @@ public class RoomListActivity extends AppCompatActivity {
             Src=getIntent().getStringExtra("src");
         if(getIntent().hasExtra("time"))
             JourneyTime=getIntent().getStringExtra("time");
-        if(getIntent().hasExtra("time"))
+        if(getIntent().hasExtra("tag"))
             Tag=getIntent().getStringExtra("tag");
     }
     private void createNewRoom() {
@@ -181,7 +193,7 @@ public class RoomListActivity extends AppCompatActivity {
         String timeToDisplay = dateFormatter.format(new Date(time));
 
         String roomId = mRoomDatabaseReference.push().getKey();
-        Room room = new Room(JourneyPlan.mUser,timeToDisplay,Src,Dest,Tag,roomId);
+        Room room = new Room(JourneyPlan.mUser,timeToDisplay,Src,Dest,Tag,roomId,JourneyTime);
         room.setUser1(JourneyPlan.mUser);
 
         mRoomDatabaseReference.child(Tag).child(roomId).setValue(room);

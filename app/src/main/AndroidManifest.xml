@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/NewAppTheme">
-        <activity android:name=".TagSelectionActivity"></activity>
+        <activity android:name=".JoinRequestsActivity"></activity>
+        <activity android:name=".TagSelectionActivity" />
         <activity
             android:name=".SliderActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -20,8 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ChatRoom" />
-        <activity android:name=".JourneyPlan" >
-        </activity>
+        <activity android:name=".JourneyPlan"></activity>
         <activity
             android:name=".RoomListActivity"
             android:theme="@style/AppTheme.NoActionBar" />

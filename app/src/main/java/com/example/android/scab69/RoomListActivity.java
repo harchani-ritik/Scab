@@ -31,6 +31,7 @@ import java.util.Date;
 
 public class RoomListActivity extends AppCompatActivity {
 
+    public static Room MyRoom = new Room();
     static ArrayList<Room> YourRoomsList=new ArrayList<>();
     private static ArrayList<Room> FilterRoomsList;
     FirebaseDatabase firebaseDatabase;
@@ -67,10 +68,7 @@ public class RoomListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 showConfirmationDialog();
-                JourneyPlan.mUser.setStatus(User.INAROOM);
-                /*
-                Intent intent = new Intent(RoomListActivity.this,RoomActivity.class);
-                startActivity(intent);*/
+
             }
         });
         final Button yourRooms = findViewById(R.id.yourRooms);
@@ -129,9 +127,12 @@ public class RoomListActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Toast.makeText(view.getContext(),"Ok Clicked",Toast.LENGTH_SHORT).show();
+
                 alertDialog.dismiss();
                 createNewRoom();
+                Toast.makeText(view.getContext(),MyRoom.getJourneyTime(),Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(RoomListActivity.this, JoinRequestsActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -210,6 +211,7 @@ public class RoomListActivity extends AppCompatActivity {
         room.setUser1(JourneyPlan.mUser);
 
         mRoomDatabaseReference.child(Tag).child(roomId).setValue(room);
+        MyRoom=room;
     }
 
     public static Room getRoomFromRoomsList(int position) {

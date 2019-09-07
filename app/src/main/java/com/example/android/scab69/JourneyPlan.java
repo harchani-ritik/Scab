@@ -46,7 +46,7 @@ public class JourneyPlan extends AppCompatActivity implements AdapterView.OnItem
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_journey_plan);
 
-        fillInTempData();
+        //fillInTempData();
         mFirebaseAuth=FirebaseAuth.getInstance();
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -65,7 +65,6 @@ public class JourneyPlan extends AppCompatActivity implements AdapterView.OnItem
                                     .setLogo(R.drawable.app_logo)
                                     .setIsSmartLockEnabled(false)
                                     .setAvailableProviders(Arrays.asList(
-                                            new AuthUI.IdpConfig.AnonymousBuilder().build(),
                                             new AuthUI.IdpConfig.PhoneBuilder().build()))
                                     .build(),
                             RC_SIGN_IN);

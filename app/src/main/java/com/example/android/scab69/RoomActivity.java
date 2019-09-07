@@ -15,6 +15,7 @@ import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -31,6 +32,9 @@ public class RoomActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room);
 
+        mRoom=RoomListActivity.MyRoom;
+        if(mRoom==null)
+            Toast.makeText(this,"Error",Toast.LENGTH_SHORT).show();
         Button chatButton = findViewById(R.id.chat_button);
         Button bookRideButton = findViewById(R.id.book_ride_button);
 
@@ -40,6 +44,7 @@ public class RoomActivity extends AppCompatActivity {
             chatButton.setVisibility(GONE);
             bookRideButton.setVisibility(GONE);
         }
+
 
         chatButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,7 +117,7 @@ public class RoomActivity extends AppCompatActivity {
         TextView roll4TextView = findViewById(R.id.roll4_text_view);
 
         //Adding users in the room
-        if(numberOfUsers== 0 && (mRoom.getUser1().getStatus()==User.INAROOM)) {
+        if(numberOfUsers== 0 ) {
             user1TextView.setText(mRoom.getUser1().getName());
             roll1TextView.setText(mRoom.getUser1().getCommunityStatus());
             numberOfUsers++;
@@ -122,7 +127,7 @@ public class RoomActivity extends AppCompatActivity {
             user1TextView.setVisibility(GONE);
             roll1TextView.setVisibility(GONE);
         }
-        if(numberOfUsers== 1 && (mRoom.getUser2().getStatus()==2)) {
+        if(numberOfUsers== 1) {
             user2TextView.setText(mRoom.getUser2().getName());
             roll2TextView.setText(mRoom.getUser1().getCommunityStatus());
             numberOfUsers++;
@@ -133,7 +138,7 @@ public class RoomActivity extends AppCompatActivity {
             roll2TextView.setVisibility(GONE);
         }
 
-        if(numberOfUsers== 2  && (mRoom.getUser3().getStatus()==2)) {
+        if(numberOfUsers== 2 ) {
             user3TextView.setText(mRoom.getUser3().getName());
             roll3TextView.setText(mRoom.getUser1().getCommunityStatus());
             numberOfUsers++;

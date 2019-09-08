@@ -3,14 +3,18 @@ package com.example.android.scab69;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.firebase.ui.auth.data.model.PhoneNumber;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -26,6 +30,7 @@ public class UserDetailsActivity extends AppCompatActivity {
 
         mUser=new User();
         mUser.setPhoneNumber(getIntent().getStringExtra("phoneNumber"));
+
 
         ErrorText=findViewById(R.id.error_text);
         final Button proceedButton = findViewById(R.id.proceed);
@@ -89,6 +94,7 @@ public class UserDetailsActivity extends AppCompatActivity {
                 if(proceedFlag==1) {
                     mUser.setStatus(User.IDLE);
                     updateUsersDatabase();
+                    saveUserDataLocally();
                     JourneyPlan.mUser=mUser;
                     Intent intent = new Intent(UserDetailsActivity.this, JourneyPlan.class);
                     intent.putExtra("detailFlag",1);
@@ -98,6 +104,17 @@ public class UserDetailsActivity extends AppCompatActivity {
         });
     }
 
+    private void saveUserDataLocally() {
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString("name", mUser.getName());
+            editor.putString("roll", mUser.getCommunityStatus());
+            editor.putString("contact", mUser.getPhoneNumber());
+            editor.putString("userId", mUser.getUid());
+            editor.putInt("gender", mUser.getGender());
+            editor.putInt("age", mUser.getAge());
+            editor.apply();
+    }
 
 
     public static User getmUser() {
@@ -148,5 +165,7 @@ public class UserDetailsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
     }
+
+
 }
 

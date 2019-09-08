@@ -8,6 +8,9 @@ public class Room {
     public final static int VACANT=0;
     public final static int FULL=1;
 
+    public final static int Declined=0;
+    public final static int Accepted=1;
+
     private User user1=new User();
     private User user2=new User();
     private User user3=new User();
@@ -19,6 +22,9 @@ public class Room {
     private String journeyTime;
     private String roomCreationTime;
     private ArrayList<User> tempUserList=new ArrayList<>();
+    private int NumberOfUsers;
+
+    private int MyRequest;
 
     private int roomStatus;
 
@@ -27,6 +33,7 @@ public class Room {
 
     public Room(User user1,String roomCreationTime,String source,String destination,String roomTag,String roomId,String journeyTime){
         this.user1=user1;
+        this.NumberOfUsers=1;
         this.roomCreationTime=roomCreationTime;
         this.source=source;
         this.destination=destination;
@@ -34,13 +41,14 @@ public class Room {
         this.roomId=roomId;
         this.journeyTime=journeyTime;
         this.roomStatus=Room.VACANT;
-
+        MyRequest=Declined;
         this.tempUserList=new ArrayList<>();
         user2=user3=user4=null;
     }
 
     public User getUser1() {
         return user1;
+
     }
 
     public User getUser2() {
@@ -76,14 +84,18 @@ public class Room {
     }
 
     public void setUser2(User user2) {
+        NumberOfUsers=2;
         this.user2 = user2;
     }
 
     public void setUser3(User user3) {
+        NumberOfUsers=3;
         this.user3 = user3;
     }
 
     public void setUser4(User user4) {
+        roomStatus=Room.FULL;
+        NumberOfUsers=4;
         this.user4 = user4;
     }
 
@@ -134,5 +146,21 @@ public class Room {
 
     public void setTempUserList(ArrayList<User> tempUserList) {
         this.tempUserList = tempUserList;
+    }
+
+    public void setNumberOfUsers(int numberOfUsers) {
+        NumberOfUsers = numberOfUsers;
+    }
+
+    public int getNumberOfUsers() {
+        return NumberOfUsers;
+    }
+
+    public int getMyRequest() {
+        return MyRequest;
+    }
+
+    public void setMyRequest(int myRequest) {
+        MyRequest = myRequest;
     }
 }

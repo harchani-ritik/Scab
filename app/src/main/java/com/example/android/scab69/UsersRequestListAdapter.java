@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,14 +23,14 @@ public class UsersRequestListAdapter extends RecyclerView.Adapter<UsersRequestLi
 
     private ArrayList<User> UsersList;
     private static MyClickListener myClickListener;
-    String D,S;
+    private String Destination,Source;
     public static class RoomObjectHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener
     {
         TextView name,roll,age,gender,Dest,Src;
-        Button cofirm;
+        Button confirmButton;
 
-        public RoomObjectHolder(View itemView) {
+        RoomObjectHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
             name=itemView.findViewById(R.id.req_name);
@@ -38,7 +39,7 @@ public class UsersRequestListAdapter extends RecyclerView.Adapter<UsersRequestLi
             gender=itemView.findViewById(R.id.req_gender);
             Dest=itemView.findViewById(R.id.req_dest);
             Src=itemView.findViewById(R.id.req_src);
-            cofirm=itemView.findViewById(R.id.req_confirm_accept);
+            confirmButton=itemView.findViewById(R.id.req_confirm_accept);
         }
 
         @Override
@@ -52,10 +53,10 @@ public class UsersRequestListAdapter extends RecyclerView.Adapter<UsersRequestLi
     }
 
 
-    public UsersRequestListAdapter(ArrayList<User> myDataset,String D,String S) {
+    public UsersRequestListAdapter(ArrayList<User> myDataset,String Destination,String Source) {
         UsersList = myDataset;
-        this.D=D;
-        this.S=S;
+        this.Destination=Destination;
+        this.Source=Source;
     }
 
     @Override
@@ -70,17 +71,22 @@ public class UsersRequestListAdapter extends RecyclerView.Adapter<UsersRequestLi
     public void onBindViewHolder(@NonNull final RoomObjectHolder holder, final int position) {
 
         final User user = UsersList.get(position);
-        holder.cofirm.setOnClickListener(new View.OnClickListener() {
+        holder.confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 JoinRequestsActivity.mRoom.setUser2(user);
+                JoinRequestsActivity.mRoom.getUser2().setStatus(User.INAROOM);
+                RoomActivity.mRoom=JoinRequestsActivity.mRoom;
                 JoinRequestsActivity.sendRoomToFirebase();
                 //Intent here
+                Intent intent = new Intent(view.getContext(),RoomActivity.class);
+                view.getContext().startActivity(intent);
             }
         });
-        /*holder.Dest.setText(D);
-        holder.Src.setText(S);*/
+        holder.Dest.setText(Destination);
+        holder.Src.setText(Source);
         /*
+
 
         holder.name.setText(user.getName());
         holder.age.setText(user.getAge());

@@ -15,7 +15,7 @@
         android:paddingTop="10dp"
         android:paddingBottom="5dp"
         android:textColor="#4DB86F"
-        android:textSize="24sp"
+        android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -223,9 +223,10 @@
             android:paddingTop="15dp"
             android:paddingLeft="25dp"
             android:orientation="horizontal">
+
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:src="@drawable/owner_image" />
 
             <TextView
@@ -236,7 +237,7 @@
                 android:paddingLeft="10dp"
                 android:text="User 1"
                 android:textStyle="bold"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:visibility="visible"/>
 
             <TextView
@@ -244,7 +245,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="OWNER"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:visibility="visible"/>
 
             <TextView
@@ -253,7 +254,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="IEC2018069"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:visibility="visible"/>
 
         </LinearLayout>
@@ -266,8 +267,8 @@
             android:paddingTop="15dp">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:src="@drawable/user_image" />
 
             <TextView
@@ -277,7 +278,7 @@
                 android:layout_weight="2"
                 android:text="User 2"
                 android:textStyle="bold"
-                android:paddingLeft="17dp"
+                android:paddingLeft="16dp"
                 android:textSize="18sp"
                 android:visibility="visible"/>
 
@@ -287,7 +288,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Roll No 2"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:visibility="visible"/>
 
         </LinearLayout>
@@ -300,8 +301,8 @@
             android:paddingTop="15dp">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:src="@drawable/user_image" />
 
             <TextView
@@ -312,7 +313,7 @@
                 android:layout_weight="2"
                 android:text="User 3"
                 android:textStyle="bold"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:visibility="visible"/>
 
             <TextView
@@ -321,7 +322,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Roll No 3"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:visibility="visible"/>
 
         </LinearLayout>
@@ -334,8 +335,8 @@
             android:paddingLeft="27dp">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:src="@drawable/user_image" />
 
             <TextView
@@ -346,7 +347,7 @@
                 android:text="User 4"
                 android:textStyle="bold"
                 android:paddingLeft="17dp"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:visibility="visible"/>
 
             <TextView
@@ -355,7 +356,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Roll No 4"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:visibility="visible"/>
 
         </LinearLayout>
@@ -366,26 +367,37 @@
 
     <Button
         android:id="@+id/book_ride_button"
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:text="Book Ride"
         android:layout_marginLeft="25dp"
         android:layout_marginBottom="15dp"
-        android:background="#4DB86F"
+        android:background="@drawable/custom_edit_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent" />
 
 
     <Button
         android:id="@+id/chat_button"
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:text="Chat"
         android:layout_marginRight="25dp"
         android:layout_marginBottom="15dp"
-        android:background="#4DB86F"
+        android:background="@drawable/custom_edit_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
+
+    <Button
+        android:id="@+id/see_all_requests_button"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/custom_edit_text"
+        android:text="See Requests"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

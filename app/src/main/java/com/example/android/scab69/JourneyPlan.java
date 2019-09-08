@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -33,7 +34,7 @@ public class JourneyPlan extends AppCompatActivity implements AdapterView.OnItem
     String Source, Destination,Time;
     Button SearchRide;
 
-    public static User mUser= new User();
+    public static User mUser;
     public static final int RC_SIGN_IN = 1;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
@@ -46,7 +47,17 @@ public class JourneyPlan extends AppCompatActivity implements AdapterView.OnItem
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_journey_plan);
 
-        //fillInTempData();
+        mUser = new User();
+        fetchUserDataLocally();
+
+        /*Toast.makeText(this,"Name:"+mUser.getName(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"Name:"+mUser.getAge(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"Name:"+mUser.getCommunityStatus(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"Name:"+mUser.getGender(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"NumberPhone:"+mUser.getPhoneNumber(),Toast.LENGTH_SHORT).show();*/
+        if(mUser.getPhoneNumber()==null)
+            mUser.setPhoneNumber("9598227422");
+
         mFirebaseAuth=FirebaseAuth.getInstance();
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -65,6 +76,7 @@ public class JourneyPlan extends AppCompatActivity implements AdapterView.OnItem
                                     .setLogo(R.drawable.app_logo)
                                     .setIsSmartLockEnabled(false)
                                     .setAvailableProviders(Arrays.asList(
+                                            new AuthUI.IdpConfig.AnonymousBuilder().build(),
                                             new AuthUI.IdpConfig.PhoneBuilder().build()))
                                     .build(),
                             RC_SIGN_IN);
@@ -153,18 +165,16 @@ public class JourneyPlan extends AppCompatActivity implements AdapterView.OnItem
                 }
             }
         });
-
-
     }
 
-    private void  fillInTempData() {
-        mUser.setName("Anonymous");
-        mUser.setPhoneNumber("100");
-        mUser.setCommunityStatus("99");
-        mUser.setAge(18);
-        mUser.setGender(User.MALE);
-        mUser.setUid("-Lkaajaminal");
-        mUser.setStatus(User.IDLE);
+    private void fetchUserDataLocally() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mUser.setName(preferences.getString("name", null));
+        mUser.setCommunityStatus(preferences.getString("roll",null));
+        mUser.setAge(preferences.getInt("gender",0));
+        mUser.setAge(preferences.getInt("age",0));
+        mUser.setPhoneNumber(preferences.getString("contact",null));
+        mUser.setUid(preferences.getString("userId",null));
     }
 
     private void checkUserDetails() {
@@ -172,14 +182,13 @@ public class JourneyPlan extends AppCompatActivity implements AdapterView.OnItem
                 .getBoolean("isFirstRun", true);
 
         if (isFirstRun) {
-            //show start
             Intent intent = new Intent(JourneyPlan.this, UserDetailsActivity.class);
+            intent.putExtra("phoneNumber",UserPhoneNumber);
             startActivity(intent);
-            //Toast.makeText(JourneyPlan.this, "First Run", Toast.LENGTH_LONG).show();
         }
 
     }
-    private void checkSliderActivity() {
+    /*private void checkSliderActivity() {
         isFRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getBoolean("isFRun", true);
 
@@ -188,17 +197,17 @@ public class JourneyPlan extends AppCompatActivity implements AdapterView.OnItem
             startActivity(intent);
         }
 
-    }
+    }*/
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        int SliderFlag=getIntent().getIntExtra("sliderFlag",0);
+        /*int SliderFlag=getIntent().getIntExtra("sliderFlag",0);
         if(SliderFlag==1)
             getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                     .putBoolean("isFRun", false).apply();
-        checkSliderActivity();
+        checkSliderActivity();*/
 
         mFirebaseAuth.addAuthStateListener(mAuthStateListener);
 
@@ -206,7 +215,6 @@ public class JourneyPlan extends AppCompatActivity implements AdapterView.OnItem
         if(DetailFlag==1)
             getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                     .putBoolean("isFirstRun", false).apply();
-        checkUserDetails();
 
     }
 
@@ -219,6 +227,7 @@ public class JourneyPlan extends AppCompatActivity implements AdapterView.OnItem
     private void onSignedInInitialize(String phoneNumber) {
         //UserDetailsActivity.mUser.setPhoneNumber(phoneNumber);
         UserPhoneNumber=phoneNumber;
+        checkUserDetails();
     }
     private void onSignedOutCleanup() {
         JourneyPlan.mUser=null;

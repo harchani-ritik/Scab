@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,14 +24,14 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.RoomOb
     private static MyClickListener myClickListener;
     static final int YourRoomsList =1;
     static final int FilterRoomsList =0;
-    int mFlag;
+    private int mFlag;
 
     public static class RoomObjectHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener
     {
         TextView JoinRoom,Owner,Tag,Dest,Src,JourneyTime;
 
-        public RoomObjectHolder(View itemView) {
+        RoomObjectHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
             JoinRoom=(TextView)itemView.findViewById(R.id.join_room_button);
@@ -73,6 +74,19 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.RoomOb
         {
             holder.JoinRoom.setBackgroundResource(R.drawable.custom_edit_text3);
             holder.JoinRoom.setText("Pending Request");
+            if(room.getMyRequest()==Room.Accepted)
+            {
+                holder.JoinRoom.setBackgroundResource(R.drawable.custom_edit_text);
+                holder.JoinRoom.setText("Confirm Join");
+                holder.JoinRoom.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(view.getContext(),RoomActivity.class);
+                        intent.putExtra("positionInMyRooms",position);
+                        view.getContext().startActivity(intent);
+                    }
+                });
+            }
         }
         else{
             holder.JoinRoom.setOnClickListener(new View.OnClickListener() {

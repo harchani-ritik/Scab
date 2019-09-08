@@ -1,18 +1,16 @@
 package com.example.android.scab69;
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.drawable.GradientDrawable;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.graphics.Color;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -69,6 +67,17 @@ public class RoomListActivity extends AppCompatActivity {
             public void onClick(View view) {
                 showConfirmationDialog();
 
+            }
+        });
+
+        ImageView refreshButton = findViewById(R.id.refresh_button);
+        refreshButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                overridePendingTransition(0, 0);
+                startActivity(getIntent());
+                overridePendingTransition(0, 0);
             }
         });
         final Button yourRooms = findViewById(R.id.yourRooms);
@@ -131,7 +140,7 @@ public class RoomListActivity extends AppCompatActivity {
                 alertDialog.dismiss();
                 createNewRoom();
                 Toast.makeText(view.getContext(),MyRoom.getJourneyTime(),Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(RoomListActivity.this, JoinRequestsActivity.class);
+                Intent intent = new Intent(RoomListActivity.this, RoomActivity.class);
                 startActivity(intent);
             }
         });
@@ -171,6 +180,16 @@ public class RoomListActivity extends AppCompatActivity {
                         FilterRoomsList.add(room);
                         mAdapter = new RoomListAdapter(FilterRoomsList,0);
                         mRecyclerView.setAdapter(mAdapter);
+                    }
+                    for(int i=0;i<YourRoomsList.size();i++)
+                    {
+                        if(YourRoomsList.get(i).getRoomId().equals(room.getRoomId()))
+                        {
+                            if(room.getUser2().getUid().equals(JourneyPlan.mUser.getUid()))
+                            {
+                                YourRoomsList.get(i).setMyRequest(Room.Accepted);
+                            }
+                        }
                     }
                 }
 

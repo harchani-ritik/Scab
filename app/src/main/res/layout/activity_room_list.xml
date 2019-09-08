@@ -6,17 +6,33 @@
     android:layout_height="match_parent"
     android:id="@+id/roomListRootView">
 
-    <TextView
-        android:id="@+id/rides"
-        android:layout_width="113dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3"
-        android:gravity="top"
-        android:layout_gravity="center_horizontal"
-        android:text="Rides"
-        android:textColor="#4DB86F"
-        android:textSize="45sp"
-        android:visibility="visible" />
+        android:layout_weight="3" >
+
+        <TextView
+            android:id="@+id/rides"
+            android:layout_width="113dp"
+            android:layout_height="match_parent"
+
+            android:gravity="top"
+            android:layout_gravity="center_horizontal"
+            android:text="Rides"
+            android:layout_marginLeft="140dp"
+            android:textColor="#4DB86F"
+            android:textSize="45sp"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/refresh_button"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            card_view:srcCompat="@drawable/green_refresh_button" />
+
+    </LinearLayout>
 
     <LinearLayout
 
@@ -66,5 +82,6 @@
         android:background="@drawable/custom_edit_text"
         android:text="Create Your Own Room"
         android:textColor="@color/white" />
+
 </LinearLayout>
 

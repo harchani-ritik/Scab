@@ -35,27 +35,27 @@ public class ChatRoom extends AppCompatActivity {
     private Button mSendButton;
 
     Room mRoom;
-    int RoomPosition;
+    String RoomId,RoomTag;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_room);
 
-        if(getIntent().hasExtra("position")) {
-            RoomPosition= getIntent().getIntExtra("position", 0);
-            mRoom = RoomListActivity.getRoomFromRoomsList(RoomPosition);
+        if(getIntent().hasExtra("roomId")&& getIntent().hasExtra("roomTag")) {
+            RoomId= getIntent().getStringExtra("roomId");
+            RoomTag= getIntent().getStringExtra("roomTag");
         }
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("rooms")
-                .child(mRoom.getRoomTag()).child(mRoom.getRoomId()).child("messages");
+                .child(RoomTag).child(RoomId).child("messages");
 
         mMessageListView = (ListView) findViewById(R.id.messageListView);
         mMessageEditText = (EditText) findViewById(R.id.messageEditText);
         mSendButton = (Button) findViewById(R.id.sendButton);
 
-        ArrayList<FriendlyMessage> friendlyMessages = new ArrayList<>();
-        mMessageAdapter = new MessageAdapter(this, R.layout.item_message, friendlyMessages);
+        ArrayList<Message> messages = new ArrayList<>();
+        mMessageAdapter = new MessageAdapter(this, R.layout.item_message, messages);
         mMessageListView.setAdapter(mMessageAdapter);
 
 
@@ -83,11 +83,8 @@ public class ChatRoom extends AppCompatActivity {
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                FriendlyMessage friendlyMessage = new FriendlyMessage(mMessageEditText.getText().toString(),user.getDisplayName()
-                        , null);
-                mMessagesDatabaseReference.push().setValue(friendlyMessage);
-
+                Message message = new Message(mMessageEditText.getText().toString(),JourneyPlan.mUser.getName());
+                mMessagesDatabaseReference.push().setValue(message);
                 mMessageEditText.setText("");
             }
         });
@@ -104,8 +101,8 @@ public class ChatRoom extends AppCompatActivity {
             mChildEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot,  String s) {
-                    FriendlyMessage friendlyMessage = dataSnapshot.getValue(FriendlyMessage.class);
-                    mMessageAdapter.add(friendlyMessage);
+                    Message message = dataSnapshot.getValue(Message.class);
+                    mMessageAdapter.add(message);
                 }
 
                 public void onChildChanged(@NonNull DataSnapshot dataSnapshot,  String s) {

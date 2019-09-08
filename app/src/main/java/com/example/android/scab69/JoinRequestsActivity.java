@@ -83,4 +83,5 @@ public class JoinRequestsActivity extends AppCompatActivity {
         firebaseDatabase.getReference().child("rooms").child(mRoom.getRoomTag())
                 .child(mRoom.getRoomId()).setValue(mRoom);
     }
+
 }

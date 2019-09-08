@@ -20,7 +20,7 @@ public class User {
     private String communityStatus;
     private String uid;
     //basically community status is an additional variable which we will use here for storing Roll Number
-    private int userStatus=User.IDLE;
+    private int userStatus;
     private int userRequestStatus;
 
     public User(){
@@ -57,7 +57,7 @@ public class User {
     }
 
     public void setStatus(int status) {
-        this.userStatus = User.IDLE;
+        this.userStatus = status;
     }
 
     public String getUid() {

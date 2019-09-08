@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/NewAppTheme">
-        <activity android:name=".JoinRequestsActivity"></activity>
+        <activity android:name=".JoinRequestsActivity"
+            android:parentActivityName=".RoomActivity"></activity>
         <activity android:name=".TagSelectionActivity" />
         <activity
             android:name=".SliderActivity"
@@ -20,7 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ChatRoom" />
+        <activity android:name=".ChatRoom"
+            android:parentActivityName=".RoomActivity"/>
         <activity android:name=".JourneyPlan"></activity>
         <activity
             android:name=".RoomListActivity"

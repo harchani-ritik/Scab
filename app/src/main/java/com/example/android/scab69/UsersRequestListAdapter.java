@@ -74,8 +74,19 @@ public class UsersRequestListAdapter extends RecyclerView.Adapter<UsersRequestLi
         holder.confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                JoinRequestsActivity.mRoom.setUser2(user);
-                JoinRequestsActivity.mRoom.getUser2().setStatus(User.INAROOM);
+
+                if(JoinRequestsActivity.mRoom.getUser2() == null) {
+                    JoinRequestsActivity.mRoom.setUser2(user);
+                    JoinRequestsActivity.mRoom.getUser2().setStatus(User.INAROOM);
+                }
+                else if(JoinRequestsActivity.mRoom.getUser3() == null){
+                    JoinRequestsActivity.mRoom.setUser3(user);
+                    JoinRequestsActivity.mRoom.getUser3().setStatus(User.INAROOM);
+                }
+                else if(JoinRequestsActivity.mRoom.getUser4() == null){
+                    JoinRequestsActivity.mRoom.setUser4(user);
+                    JoinRequestsActivity.mRoom.getUser4().setStatus(User.INAROOM);
+                }
                 RoomActivity.mRoom=JoinRequestsActivity.mRoom;
                 JoinRequestsActivity.sendRoomToFirebase();
                 //Intent here

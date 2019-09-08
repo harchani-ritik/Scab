@@ -96,16 +96,18 @@ public class UsersRequestListAdapter extends RecyclerView.Adapter<UsersRequestLi
         });
         holder.Dest.setText(Destination);
         holder.Src.setText(Source);
-        /*
 
+        if(user!=null) {
+            holder.name.setText(user.getName());
+            holder.age.setText(Integer.toString(user.getAge()));
 
-        holder.name.setText(user.getName());
-        holder.age.setText(user.getAge());
-        if(user.getGender()==0)
-            holder.gender.setText("Gender: MALE");
-        else
-            holder.gender.setText("Gender: FEMALE");
-        holder.roll.setText(user.getCommunityStatus());*/
+            if (user.getGender() == 0)
+                holder.gender.setText("Gender: MALE");
+            else
+                holder.gender.setText("Gender: FEMALE");
+
+            holder.roll.setText(user.getCommunityStatus());
+        }
     }
 
     public void addItem(User dataObj, int index) {

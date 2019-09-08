@@ -96,7 +96,6 @@ public class RoomListActivity extends AppCompatActivity {
         allRooms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 allRooms.setBackgroundResource(R.drawable.custom_edit_text);
                 yourRooms.setBackgroundResource(R.drawable.custom_edit_text1);
                 mAdapter= new RoomListAdapter(FilterRoomsList,RoomListAdapter.FilterRoomsList);
@@ -183,13 +182,35 @@ public class RoomListActivity extends AppCompatActivity {
                     }
                     for(int i=0;i<YourRoomsList.size();i++)
                     {
-                        if(YourRoomsList.get(i).getRoomId().equals(room.getRoomId()))
+                        try
                         {
-                            if(room.getUser2().getUid().equals(JourneyPlan.mUser.getUid()))
+                            if(YourRoomsList.get(i).getRoomId().equals(room.getRoomId()))
                             {
-                                YourRoomsList.get(i).setMyRequest(Room.Accepted);
+                                if(room.getUser2()!=null) {
+                                    if (room.getUser2().getUid().equals(JourneyPlan.mUser.getUid())) {
+                                        YourRoomsList.get(i).setUser2(JourneyPlan.mUser);
+                                        YourRoomsList.get(i).setMyRequest(Room.Accepted);
+                                    }
+                                }
+                                if(room.getUser3()!=null) {
+                                    if (room.getUser3().getUid().equals(JourneyPlan.mUser.getUid())) {
+                                        YourRoomsList.get(i).setUser3(JourneyPlan.mUser);
+                                        YourRoomsList.get(i).setMyRequest(Room.Accepted);
+                                    }
+                                }
+                                if(room.getUser4()!=null) {
+                                    if (room.getUser4().getUid().equals(JourneyPlan.mUser.getUid())) {
+                                        YourRoomsList.get(i).setUser4(JourneyPlan.mUser);
+                                        YourRoomsList.get(i).setMyRequest(Room.Accepted);
+                                    }
+                                }
                             }
                         }
+                        catch (Exception e)
+                        {
+
+                        }
+
                     }
                 }
 

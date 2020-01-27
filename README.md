@@ -31,6 +31,12 @@ Here are some screenshots of android app made in Java.
 ![chat_room](screenshot4.png)
 
 ----------------------------
+### Authors
+- [Ritik Harchani](https://github.com/harchani-ritik)
+- [Kartik Nema](https://github.com/Kartik2301)
+- [Vivek Kumar Mehta](https://github.com/arcane-tyro)
+- [Priyesh Raj](https://github.com/ekthapriyesh24)
+
 Designs of the mobile app made by [Achint Agarwal](https://www.facebook.com/achint.agarwal.923) can be can be found at:
 
 [Scab Designs](https://www.figma.com/file/iqpHdZb4S2JqNGa7znAICn/s-cab)
